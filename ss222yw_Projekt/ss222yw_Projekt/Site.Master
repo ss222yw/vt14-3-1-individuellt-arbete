@@ -1,0 +1,38 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ss222yw_Projekt.SiteMaster" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta charset="utf-8" />
+    <title>SellYourCarFast</title>    
+ 
+          <%: Scripts.Render("~/bundles/modernizr") %>
+           <%: Styles.Render("~/Content/css") %>
+  
+    <asp:PlaceHolder ID="HeadContentPlaceHolder" runat="server"/> 
+</head>
+<body>
+    <form id="TheForm" runat="server">
+  
+    <header>
+        <div class="content-wrapper">
+           
+                <h1 class="site-title">
+                    SellYourCarFast AB
+                </h1>
+            </div>
+       
+    </header>
+    <div id="body">
+        <asp:ContentPlaceHolder ID="MainContentPlaceHolder" runat="server" />
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; Sahib Sahib ss222yw UD13</p>
+            </div>
+        </div>
+    </footer>
+    </form>
+</body>
+</html>
