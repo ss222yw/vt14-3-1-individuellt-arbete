@@ -3,4 +3,11 @@
      <h1>
             Ny Bilannons
         </h1>
+
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
+
+    <asp:FormView ID="CarAdView" runat="server" ItemType="ss222yw_Projekt.Model.CarAd"
+         DefaultMode="Insert"
+         RenderOuterTable="false"
+         InsertMethod="CarAdView_InsertItem"></asp:FormView>
 </asp:Content>

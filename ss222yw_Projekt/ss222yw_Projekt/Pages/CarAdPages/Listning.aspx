@@ -3,5 +3,13 @@
      <h1>
         Bilannonser
     </h1>
-  
+
+
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
+
+    <asp:ListView ID="CarAdView" runat="server" ItemType="ss222yw_Projekt.Model.CarAd"
+         SelectMethod="CarAdView_GetData"
+         DataKeyNames="CarAdID"></asp:ListView>
+
+ 
 </asp:Content>

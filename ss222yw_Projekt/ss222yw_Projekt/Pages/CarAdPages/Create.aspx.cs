@@ -13,5 +13,16 @@ namespace ss222yw_Projekt.Pages.CarAdPages
         {
 
         }
+
+        public void CarAdView_InsertItem()
+        {
+            var item = new ss222yw_Projekt.Model.CarAd();
+            TryUpdateModel(item);
+            if (ModelState.IsValid)
+            {
+                // Save changes here
+
+            }
+        }
     }
 }

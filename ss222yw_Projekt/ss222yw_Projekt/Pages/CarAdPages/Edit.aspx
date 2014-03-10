@@ -3,4 +3,9 @@
     <h1>
         Redigera Bilannons
     </h1>
+
+    <asp:FormView ID="FormView1" runat="server"></asp:FormView>
+
+    <asp:FormView ID="FormView2" runat="server" ItemType="ss222yw_Projekt.Model.CarAd"
+         DataKeyNames="CarAdID" DefaultMode="Edit" RenderOuterTable="false" SelectMethod="CarAdFormView_GetItem" UpdateMethod="CarAdFormView_UpdateItem"></asp:FormView>
 </asp:Content>
