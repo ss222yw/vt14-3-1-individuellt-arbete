@@ -17,7 +17,7 @@ namespace ss222yw_Projekt.Model.DAL
         static DALBase()
         {
             // Hämtar anslutningssträngen från web.config.
-            _connectionString = WebConfigurationManager.ConnectionStrings["UD13_ss222yw_SellYourCarFastConnectionString"].ConnectionString;
+            _connectionString = WebConfigurationManager.ConnectionStrings["ss222yw_ProjektConnectionString"].ConnectionString;
         }
 
         //Referens till ett nytt SqlConnection.

@@ -21,7 +21,7 @@ namespace ss222yw_Projekt.Model.DAL
                     var users = new List<User>(100);
 
                     // Skapar ett SqlCommand-objekt för att exekvera specifierad lagrad procedur. 
-                    var cmd = new SqlCommand("appSchema.usp_GetUser", conn);
+                    var cmd = new SqlCommand("appSchema.uspGetUser", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Öppnar anslutningen till databasen.
@@ -72,11 +72,12 @@ namespace ss222yw_Projekt.Model.DAL
                 try
                 {
                     // Skapar ett SqlCommand-objekt för att exekvera specifierad lagrad procedur.
-                    SqlCommand cmd = new SqlCommand("appSchema.usp_GetUserByID", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspGetUserByID", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     //Lägger till den paramter den lagrade proceduren kräver.
-                    cmd.Parameters.Add("@UserID", SqlDbType.Int, 4).Value = userID;
+                    cmd.Parameters.AddWithValue("@UserID", userID);
+                    //cmd.Parameters.Add("@UserID", SqlDbType.Int, 4).Value = userID;
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();
@@ -118,7 +119,7 @@ namespace ss222yw_Projekt.Model.DAL
                 try
                 {
                     // Skapar ett SqlCommand-objekt för att exekvera specifierad lagrad procedur.
-                    SqlCommand cmd = new SqlCommand("appSchema.usp_InsertUser", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspInsertUser", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Lägger till de paramterar den lagrade proceduren kräver.
@@ -155,7 +156,7 @@ namespace ss222yw_Projekt.Model.DAL
                 try
                 {
                     // Skapar ett SqlCommand-objekt för att exekvera specifierad lagrad procedur.
-                    SqlCommand cmd = new SqlCommand("appSchema.usp_UpdateUser", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspUpdateUser", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Lägger till de paramterar den lagrade proceduren kräver.
@@ -184,7 +185,7 @@ namespace ss222yw_Projekt.Model.DAL
                 try
                 {
                     // Skapar ett SqlCommand-objekt för att exekvera specifierad lagrad procedur.
-                    SqlCommand cmd = new SqlCommand("appSchema.usp_DeleteUser", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspDeleteUser", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Lägger till den paramter den lagrade proceduren kräver.

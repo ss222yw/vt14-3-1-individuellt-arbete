@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ss222yw_Projekt.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,20 +10,62 @@ namespace ss222yw_Projekt.Pages.CarAdPages
 {
     public partial class Create : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
 
+
+        private Service _service;
+
+
+        private Service Service
+        {
+            get { return _service ?? (_service = new Service()); }
         }
 
-        public void CarAdView_InsertItem()
+        //protected void Page_Load(object sender, EventArgs e)
+        //{
+
+        //}
+
+        public void CarAdFormView_InsertItem(CarAd carAd)
         {
-            var item = new ss222yw_Projekt.Model.CarAd();
-            TryUpdateModel(item);
+    
             if (ModelState.IsValid)
             {
-                // Save changes here
+                try
+                {
+                    Service service = new Service();
+                    service.SaveCarAd(carAd);
+
+                    Response.RedirectToRoute("CarAdDetails", new { id = carAd.CarAdID });
+                    Context.ApplicationInstance.CompleteRequest();
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError(String.Empty, "Fel inträffade då Bilannonsen skulle läggas till.");
+                }
 
             }
         }
+
+        public void UserFormView_InsertItem(User user)
+        {
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Service service = new Service();
+                    service.SaveUser(user);
+
+                    Response.RedirectToRoute("CarAdCreate", new { id = user.UserID });
+                    Context.ApplicationInstance.CompleteRequest();
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError(String.Empty, "Fel inträffade då Användaren skulle läggas till.");
+                }
+
+            }
+        }
+
     }
 }

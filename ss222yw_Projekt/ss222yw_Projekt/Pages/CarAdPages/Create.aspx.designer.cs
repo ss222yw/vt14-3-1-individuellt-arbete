@@ -13,21 +13,21 @@ namespace ss222yw_Projekt.Pages.CarAdPages {
     public partial class Create {
         
         /// <summary>
-        /// ValidationSummary1 control.
+        /// CarAdFormView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        protected global::System.Web.UI.WebControls.FormView CarAdFormView;
         
         /// <summary>
-        /// CarAdView control.
+        /// UserFormView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView CarAdView;
+        protected global::System.Web.UI.WebControls.FormView UserFormView;
     }
 }

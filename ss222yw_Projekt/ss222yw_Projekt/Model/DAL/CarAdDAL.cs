@@ -11,7 +11,7 @@ namespace ss222yw_Projekt.Model.DAL
     {
 
         //Hämtar alla CarAdS i databasen.
-        public IEnumerable<CarAd> GetCarAd()
+        public IEnumerable<CarAd> GetCarAds()
         {
             //Skapar ett anslutningsobjekt.
             using (var conn = CreateConnection())
@@ -22,7 +22,7 @@ namespace ss222yw_Projekt.Model.DAL
                     var carAds = new List<CarAd>(100);
 
                     // Skapar ett SqlCommand-objekt för att exekvera specifierad lagrad procedur. 
-                    var cmd = new SqlCommand("appSchema.usp_GetCarAd", conn);
+                    var cmd = new SqlCommand("appSchema.uspGetCarAd", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Öppnar anslutningen till databasen.
@@ -34,8 +34,8 @@ namespace ss222yw_Projekt.Model.DAL
                     {
                         var carAdIDIndex = reader.GetOrdinal("CarAdID");
                         var headerIndex = reader.GetOrdinal("Header");
-                        var carBrandIDIndex = reader.GetOrdinal("CarBrandID");
-                        var userIDIndex = reader.GetOrdinal("UserID");
+                        //var carBrandIDIndex = reader.GetOrdinal("CarBrandID");
+                        //var userIDIndex = reader.GetOrdinal("UserID");
                         var modelYearIndex = reader.GetOrdinal("ModelYear");
                         var carColorIndex = reader.GetOrdinal("CarColor");
                         var priceIndex = reader.GetOrdinal("Price");
@@ -50,11 +50,11 @@ namespace ss222yw_Projekt.Model.DAL
                             {
                                 CarAdID = reader.GetInt32(carAdIDIndex),
                                 Header = reader.GetString(headerIndex),
-                                CarBrandID = reader.GetInt32(carBrandIDIndex),
-                                UserID = reader.GetInt32(userIDIndex),
+                                //CarBrandID = reader.GetInt32(carBrandIDIndex),
+                                //UserID = reader.GetInt32(userIDIndex),
                                 ModelYear = reader.GetString(modelYearIndex),
                                 CarColor = reader.GetString(carColorIndex),
-                                Price = reader.GetDouble(priceIndex),
+                                Price = reader.GetDecimal(priceIndex),
                                 Description = reader.GetString(descriptionIndex)
                             });
                         }
@@ -87,11 +87,13 @@ namespace ss222yw_Projekt.Model.DAL
                 try
                 {
                     // Skapar ett SqlCommand-objekt för att exekvera specifierad lagrad procedur.
-                    SqlCommand cmd = new SqlCommand("appSchema.usp_GetCarAdByID", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspGetCarAdByID", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    //Lägger till den paramter den lagrade proceduren kräver.
-                    cmd.Parameters.Add("@CarAdID", SqlDbType.Int, 4).Value = carAdID;
+                    cmd.Parameters.AddWithValue("@CarAdID", carAdID);
+
+                    ////Lägger till den paramter den lagrade proceduren kräver.
+                    //cmd.Parameters.Add("@CarAdID", SqlDbType.Int, 4).Value = carAdID;
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();
@@ -102,25 +104,25 @@ namespace ss222yw_Projekt.Model.DAL
                         if (reader.Read())
                         {
                             // Tar reda på vilket index de olika kolumnerna har.
-                            var carAdIDIndex = reader.GetOrdinal("CarAdID");
-                            var headerIndex = reader.GetOrdinal("Header");
-                            var carBrandIDIndex = reader.GetOrdinal("CarBrandID");
-                            var userIDIndex = reader.GetOrdinal("UserID");
-                            var modelYearIndex = reader.GetOrdinal("ModelYear");
-                            var carColorIndex = reader.GetOrdinal("CarColor");
-                            var priceIndex = reader.GetOrdinal("Price");
-                            var descriptionIndex = reader.GetOrdinal("Description");
+                            int carAdIDIndex = reader.GetOrdinal("CarAdID");
+                            int headerIndex = reader.GetOrdinal("Header");
+                            //var carBrandIDIndex = reader.GetOrdinal("CarBrandID");
+                            //var userIDIndex = reader.GetOrdinal("UserID");
+                            int modelYearIndex = reader.GetOrdinal("ModelYear");
+                            int carColorIndex = reader.GetOrdinal("CarColor");
+                            int priceIndex = reader.GetOrdinal("Price");
+                            int descriptionIndex = reader.GetOrdinal("Description");
 
                             // Returnerar referensen till de skapade CarAd-objektet.
                             return new CarAd
                             {
                                 CarAdID = reader.GetInt32(carAdIDIndex),
                                 Header = reader.GetString(headerIndex),
-                                CarBrandID = reader.GetInt32(carBrandIDIndex),
-                                UserID = reader.GetInt32(userIDIndex),
+                                //CarBrandID = reader.GetInt32(carBrandIDIndex),
+                                //UserID = reader.GetInt32(userIDIndex),
                                 ModelYear = reader.GetString(modelYearIndex),
                                 CarColor = reader.GetString(carColorIndex),
-                                Price = reader.GetDouble(priceIndex),
+                                Price = reader.GetDecimal(priceIndex),
                                 Description = reader.GetString(descriptionIndex)
                             };
                         }
@@ -147,7 +149,7 @@ namespace ss222yw_Projekt.Model.DAL
                 try
                 {
                     // Skapar ett SqlCommand-objekt för att exekvera specifierad lagrad procedur.
-                    SqlCommand cmd = new SqlCommand("appSchema.usp_InsertCarAd", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspInsertCarAd", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Lägger till de paramterar den lagrade proceduren kräver.
@@ -155,9 +157,10 @@ namespace ss222yw_Projekt.Model.DAL
                     cmd.Parameters.Add("@CarColor", SqlDbType.VarChar, 25).Value = carAd.CarColor;
                     cmd.Parameters.Add("@ModelYear", SqlDbType.Char, 4).Value = carAd.ModelYear;
                     cmd.Parameters.Add("@Description", SqlDbType.VarChar, 500).Value = carAd.Description;
-                    cmd.Parameters.Add("@Price", SqlDbType.Decimal, 2).Value = carAd.Price;
-                    cmd.Parameters.Add("@UserID", SqlDbType.Int, 4).Value = carAd.UserID;
-                    cmd.Parameters.Add("CarBrand", SqlDbType.TinyInt, 1).Value = carAd.CarBrandID;
+                    cmd.Parameters.Add("@Price", SqlDbType.Decimal).Value = carAd.Price;
+                    //cmd.Parameters.Add("@CarAdID", SqlDbType.Int, 4).Value = carAd.CarAdID;
+                    //cmd.Parameters.Add("@CarBrandID", SqlDbType.Int, 4).Value = carAd.CarBrandID;
+                    //cmd.Parameters.Add("CarBrand", SqlDbType.TinyInt, 1).Value = carAd.CarBrandID;
 
                     // Lägger till de paramterar den lagrade proceduren kräver.
                     cmd.Parameters.Add("@CarAdID", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
@@ -170,6 +173,7 @@ namespace ss222yw_Projekt.Model.DAL
                     cmd.ExecuteNonQuery();
 
                     // Hämtar primärnyckelns värde för den nya posten och tilldelar CarAd-objektet värdet.
+                    //carAd.CarAdID = (int)cmd.Parameters["@UserID"].Value;
                     carAd.CarAdID = (int)cmd.Parameters["@CarAdID"].Value;
                 }
                 catch
@@ -190,17 +194,18 @@ namespace ss222yw_Projekt.Model.DAL
                 try
                 {
                     // Skapar ett SqlCommand-objekt för att exekvera specifierad lagrad procedur.
-                    SqlCommand cmd = new SqlCommand("appSchema.usp_UpdateCarAd", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspUpdateCarAd", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Lägger till de paramterar den lagrade proceduren kräver.
+                    cmd.Parameters.Add("@CarAdID", SqlDbType.Int, 4).Value = carAd.CarAdID;
                     cmd.Parameters.Add("@Header", SqlDbType.VarChar, 25).Value = carAd.Header;
                     cmd.Parameters.Add("@CarColor", SqlDbType.VarChar, 25).Value = carAd.CarColor;
                     cmd.Parameters.Add("@ModelYear", SqlDbType.Char, 4).Value = carAd.ModelYear;
                     cmd.Parameters.Add("@Description", SqlDbType.VarChar, 500).Value = carAd.Description;
-                    cmd.Parameters.Add("@Price", SqlDbType.Decimal, 2).Value = carAd.Price;
-                    cmd.Parameters.Add("@UserID", SqlDbType.Int, 4).Value = carAd.UserID;
-                    cmd.Parameters.Add("CarBrand", SqlDbType.TinyInt, 1).Value = carAd.CarBrandID;
+                    cmd.Parameters.Add("@Price", SqlDbType.Decimal).Value = carAd.Price;
+                    //cmd.Parameters.Add("@UserID", SqlDbType.Int, 4).Value = carAd.UserID;
+                    //cmd.Parameters.Add("CarBrand", SqlDbType.TinyInt, 1).Value = carAd.CarBrandID;
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();
@@ -218,18 +223,18 @@ namespace ss222yw_Projekt.Model.DAL
         }
 
         //Tar bort en CarAd .
-        public void DeleteCarAd(int CarAdID)
+        public void DeleteCarAd(int carAdID)
         {
             using (SqlConnection conn = CreateConnection())
             {
                 try
                 {
                     // Skapar ett SqlCommand-objekt för att exekvera specifierad lagrad procedur.
-                    SqlCommand cmd = new SqlCommand("appSchema.usp_DeleteCarAd", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspDeleteCarAd", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Lägger till den paramter den lagrade proceduren kräver.
-                    cmd.Parameters.Add("@CarAdID", SqlDbType.Int, 4).Value = CarAdID;
+                    cmd.Parameters.Add("@CarAdID", SqlDbType.Int, 4).Value = carAdID;
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();

@@ -4,7 +4,7 @@
         Ta bort bilannons
     </h1>
 
-    <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
+    
 
 
 </asp:Content>

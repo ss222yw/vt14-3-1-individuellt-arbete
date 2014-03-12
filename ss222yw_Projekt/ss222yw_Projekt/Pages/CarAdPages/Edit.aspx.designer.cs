@@ -13,21 +13,21 @@ namespace ss222yw_Projekt.Pages.CarAdPages {
     public partial class Edit {
         
         /// <summary>
-        /// FormView1 control.
+        /// CarAdFormView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView FormView1;
+        protected global::System.Web.UI.WebControls.FormView CarAdFormView;
         
         /// <summary>
-        /// FormView2 control.
+        /// UserFormView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView FormView2;
+        protected global::System.Web.UI.WebControls.FormView UserFormView;
     }
 }

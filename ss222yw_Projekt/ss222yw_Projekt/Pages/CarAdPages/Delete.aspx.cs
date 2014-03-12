@@ -9,9 +9,9 @@ namespace ss222yw_Projekt.Pages.CarAdPages
 {
     public partial class Delete : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        //protected void Page_Load(object sender, EventArgs e)
+        //{
 
-        }
+        //}
     }
 }

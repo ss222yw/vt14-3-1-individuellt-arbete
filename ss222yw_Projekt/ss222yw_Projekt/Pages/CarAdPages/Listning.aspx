@@ -5,11 +5,33 @@
     </h1>
 
 
-    <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
+    <asp:ValidationSummary runat="server" CssClass="validation-summary-errors"/>
+     <div class="editor-field">
+        <asp:HyperLink runat="server" NavigateUrl='<%$ RouteUrl:routename=CarAdCreate %>' Text="Lägg till ny bilannons" />
+    </div>
+    <asp:ListView ID="CarAdListView" runat="server" 
+        ItemType="ss222yw_Projekt.Model.CarAd"
+         SelectMethod="CarAdListView_GetData"
+         DataKeyNames="CarAdID" >
 
-    <asp:ListView ID="CarAdView" runat="server" ItemType="ss222yw_Projekt.Model.CarAd"
-         SelectMethod="CarAdView_GetData"
-         DataKeyNames="CarAdID"></asp:ListView>
+      <LayoutTemplate>
+            <%-- Platshållare för CarAd --%>
+            <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
+        </LayoutTemplate>
+        <ItemTemplate>
+            <dl class="CarAd-card">
+                <dt>
+                    <asp:HyperLink runat="server" NavigateUrl='<%# GetRouteUrl("CarAdDetails", new { id = Item.CarAdID })  %>' Text='<%# Item.Header %>' />
 
- 
+                </dt>
+  
+            </dl>
+        </ItemTemplate>
+        <EmptyDataTemplate>
+            <%-- Detta visas då CarAd saknas i databasen. --%>
+            <p>
+                bilannonser saknas.
+            </p>
+        </EmptyDataTemplate>
+    </asp:ListView>
 </asp:Content>

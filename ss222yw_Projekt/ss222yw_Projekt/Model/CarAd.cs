@@ -32,13 +32,13 @@ namespace ss222yw_Projekt.Model
         public string CarColor { get; set; }
 
         [Required(ErrorMessage = "Priset måste anges!")]
-        [RegularExpression(@"^\d{1,9}\.\d{1,2}$", ErrorMessage = "Priset verkar inte vara Korrekt.")]
-        public double Price { get; set; }
+        //[RegularExpression(@"^\d{1,9}\.\d{1,2}$", ErrorMessage = "Priset verkar inte vara Korrekt.")]
+        public decimal Price { get; set; }
 
         [StringLength(500, ErrorMessage = "Beskrivning kan bestå av som mest 500 tecken.")]
         public string Description { get; set; }
 
 
-        public DateTime MyProperty { get; set; }
+        public DateTime Date { get; set; }
     }
 }
