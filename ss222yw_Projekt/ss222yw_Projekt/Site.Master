@@ -10,11 +10,15 @@
            <%: Styles.Render("~/Content/css") %>
   
     <asp:PlaceHolder ID="HeadContentPlaceHolder" runat="server"/> 
+
 </head>
 <body>
     <form id="TheForm" runat="server">
   
     <header>
+         <span><strong>Inloggad</strong></span>
+         <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%$ RouteUrl:routename=Default %>' Text="HEM" />
+         <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%$ RouteUrl:routename=CarAdCreate %>' Text="Lägg till ny bilannons" />
         <div class="content-wrapper">
            
                 <h1 class="site-title">

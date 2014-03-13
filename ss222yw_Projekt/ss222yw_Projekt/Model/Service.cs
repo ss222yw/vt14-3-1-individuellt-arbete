@@ -11,8 +11,8 @@ namespace ss222yw_Projekt.Model
         //Privat fält
         private CarAdDAL _CarAdDAL;
 
-        ////privat fällt
-        //private CarBrandDAL _CarBrandDAL;
+        //privat fällt
+        private CarBrandDAL _CarBrandDAL;
 
         //privat fällt
         private UserDAL _UserDAL;
@@ -23,11 +23,11 @@ namespace ss222yw_Projekt.Model
             get { return _CarAdDAL ?? (_CarAdDAL = new CarAdDAL()); }
         }
 
-        //// Ett CarBrandDAL-objekt skapas först då det behövs för första gången.
-        //private CarBrandDAL CarBrandDAL
-        //{
-        //    get { return _CarBrandDAL ?? (_CarBrandDAL = new CarBrandDAL()); }
-        //}
+        // Ett CarBrandDAL-objekt skapas först då det behövs för första gången.
+        private CarBrandDAL CarBrandDAL
+        {
+            get { return _CarBrandDAL ?? (_CarBrandDAL = new CarBrandDAL()); }
+        }
 
         // Ett UserDAL-objekt skapas först då det behövs för första gången.
         private UserDAL UserDAL
@@ -36,13 +36,17 @@ namespace ss222yw_Projekt.Model
         }
 
 
+        // Hämtar CarBrand med ett specifikt nummer från databasen.
+        //public CarBrand GetCarBrandByID(int carBrandID)
+        //{
+        //    return CarBrandDAL.GetCarBrandByID(carBrandID);
+        //}
 
 
-
-        // Tar bort specifierad UserUppgifter ur databasen.
-        public void DeleteUser(int UserID)
+        // Tar bort specifierad CarBrandUppgifter ur databasen.
+        public void DeleteCarBrand(int CarBrandID)
         {
-            UserDAL.DeleteUser(UserID);
+            CarBrandDAL.DeleteCarBrand(CarBrandID);
         }
 
         // Hämtar User med ett specifikt nummer från databasen.
@@ -57,19 +61,43 @@ namespace ss222yw_Projekt.Model
             return UserDAL.GetUser();
         }
 
-        public void SaveUser(User user)
+        public void SaveCarBrand(CarBrand carBrand)
         {
             // Contact-objektet sparas antingen genom att en ny post 
             // skapas eller genom att en befintlig post uppdateras.
-            if (user.UserID == 0)
+            if (carBrand.CarBrandID == 0)
             {
-                UserDAL.InsertUser(user);
+                CarBrandDAL.InsertCarBrand(carBrand);
             }
             else
             {
-                UserDAL.UpdateUser(user);
+                CarBrandDAL.UpdateCarBrand(carBrand);
             }
         }
+
+
+
+        /// Hämtar alla CarBrands.
+        public IEnumerable<CarBrand> GetCarBrand(bool refresh = false)
+        {
+            // Försöker hämta lista med CarBrands från cachen.
+            var carBrands = HttpContext.Current.Cache["CarBrand"] as IEnumerable<CarBrand>;
+
+            // Om det inte finns det en lista med CarBrands...
+            if (carBrands == null || refresh)
+            {
+                // ...hämtar då lista med CarBrands...
+                carBrands = CarBrandDAL.GetCarBrand();
+
+                // ...och cachar dessa. List-objektet, inklusive alla User-objekt, kommer att cachas 
+                // under 10 minuter, varefter de automatiskt avallokeras från webbserverns primärminne.
+                HttpContext.Current.Cache.Insert("CarBrand", carBrands, null, DateTime.Now.AddMinutes(10), TimeSpan.Zero);
+            }
+
+            // Returnerar listan med CarBrands.
+            return carBrands;
+        }
+
 
 
         // Tar bort specifierad CarAdUppgifter ur databasen.
@@ -104,5 +132,11 @@ namespace ss222yw_Projekt.Model
                 CarAdDAL.UpdateCarAd(carAd);
             }
         }
+
+
+        //public List<CarBrand> GetCarBrandByCarAdID(int caradID)
+        //{
+        //    return CarBrandDAL.GetCarBrandByCarAdID(caradID);
+        //}
     }
 }

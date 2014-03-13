@@ -34,12 +34,11 @@ namespace ss222yw_Projekt.Model.DAL
                     {
                         var carAdIDIndex = reader.GetOrdinal("CarAdID");
                         var headerIndex = reader.GetOrdinal("Header");
-                        //var carBrandIDIndex = reader.GetOrdinal("CarBrandID");
-                        //var userIDIndex = reader.GetOrdinal("UserID");
                         var modelYearIndex = reader.GetOrdinal("ModelYear");
                         var carColorIndex = reader.GetOrdinal("CarColor");
                         var priceIndex = reader.GetOrdinal("Price");
                         var descriptionIndex = reader.GetOrdinal("Description");
+                        var dateIndex = reader.GetOrdinal("Date");
 
 
                         // Så länge som det finns poster att läsa returnerar Read true annars false.
@@ -50,12 +49,11 @@ namespace ss222yw_Projekt.Model.DAL
                             {
                                 CarAdID = reader.GetInt32(carAdIDIndex),
                                 Header = reader.GetString(headerIndex),
-                                //CarBrandID = reader.GetInt32(carBrandIDIndex),
-                                //UserID = reader.GetInt32(userIDIndex),
                                 ModelYear = reader.GetString(modelYearIndex),
                                 CarColor = reader.GetString(carColorIndex),
                                 Price = reader.GetDecimal(priceIndex),
-                                Description = reader.GetString(descriptionIndex)
+                                Description = reader.GetString(descriptionIndex),
+                                Date = reader.GetDateTime(dateIndex)
                             });
                         }
 
@@ -69,7 +67,7 @@ namespace ss222yw_Projekt.Model.DAL
                 }
                 catch
                 {
-                    throw new ApplicationException("An error occured while getting Users from the database.");
+                    throw new ApplicationException("An error occured while getting CarAd from the database.");
 
                 }
             }
@@ -112,7 +110,7 @@ namespace ss222yw_Projekt.Model.DAL
                             int carColorIndex = reader.GetOrdinal("CarColor");
                             int priceIndex = reader.GetOrdinal("Price");
                             int descriptionIndex = reader.GetOrdinal("Description");
-
+                            int dateIndex = reader.GetOrdinal("Date");
                             // Returnerar referensen till de skapade CarAd-objektet.
                             return new CarAd
                             {
@@ -123,7 +121,8 @@ namespace ss222yw_Projekt.Model.DAL
                                 ModelYear = reader.GetString(modelYearIndex),
                                 CarColor = reader.GetString(carColorIndex),
                                 Price = reader.GetDecimal(priceIndex),
-                                Description = reader.GetString(descriptionIndex)
+                                Description = reader.GetString(descriptionIndex),
+                                Date = reader.GetDateTime(dateIndex)
                             };
                         }
                     }
@@ -158,12 +157,10 @@ namespace ss222yw_Projekt.Model.DAL
                     cmd.Parameters.Add("@ModelYear", SqlDbType.Char, 4).Value = carAd.ModelYear;
                     cmd.Parameters.Add("@Description", SqlDbType.VarChar, 500).Value = carAd.Description;
                     cmd.Parameters.Add("@Price", SqlDbType.Decimal).Value = carAd.Price;
-                    //cmd.Parameters.Add("@CarAdID", SqlDbType.Int, 4).Value = carAd.CarAdID;
-                    //cmd.Parameters.Add("@CarBrandID", SqlDbType.Int, 4).Value = carAd.CarBrandID;
-                    //cmd.Parameters.Add("CarBrand", SqlDbType.TinyInt, 1).Value = carAd.CarBrandID;
 
                     // Lägger till de paramterar den lagrade proceduren kräver.
                     cmd.Parameters.Add("@CarAdID", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
+
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();
@@ -175,6 +172,7 @@ namespace ss222yw_Projekt.Model.DAL
                     // Hämtar primärnyckelns värde för den nya posten och tilldelar CarAd-objektet värdet.
                     //carAd.CarAdID = (int)cmd.Parameters["@UserID"].Value;
                     carAd.CarAdID = (int)cmd.Parameters["@CarAdID"].Value;
+
                 }
                 catch
                 {
@@ -204,8 +202,7 @@ namespace ss222yw_Projekt.Model.DAL
                     cmd.Parameters.Add("@ModelYear", SqlDbType.Char, 4).Value = carAd.ModelYear;
                     cmd.Parameters.Add("@Description", SqlDbType.VarChar, 500).Value = carAd.Description;
                     cmd.Parameters.Add("@Price", SqlDbType.Decimal).Value = carAd.Price;
-                    //cmd.Parameters.Add("@UserID", SqlDbType.Int, 4).Value = carAd.UserID;
-                    //cmd.Parameters.Add("CarBrand", SqlDbType.TinyInt, 1).Value = carAd.CarBrandID;
+
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();

@@ -69,50 +69,36 @@ namespace ss222yw_Projekt.Pages.CarAdPages
             }
         }
 
-        // The id parameter should match the DataKeyNames value set on the control
-        // or be decorated with a value provider attribute, e.g. [QueryString]int id
-        public ss222yw_Projekt.Model.User UserFormView_GetItem([RouteData]int id)
-        {
-              try
-              {
-                  return Service.GetUserByID(id);
-              }
-              catch (Exception)
-              {
-                  ModelState.AddModelError(String.Empty, "Fel inträffade då användaren hämtades vid redigering.");
-                  return null;
-              }
-        }
+      
+        //// The id parameter name should match the DataKeyNames value set on the control
+        //public void UserFormView_UpdateItem(int userID)
+        //{
+        //    try
+        //    {
 
-        // The id parameter name should match the DataKeyNames value set on the control
-        public void UserFormView_UpdateItem(int userID)
-        {
-            try
-            {
+        //        var user = Service.GetUserByID(userID);
+        //        if (user == null)
+        //        {
+        //            // The item wasn't found
+        //            ModelState.AddModelError(String.Empty, String.Format("User with id {0} was not found", userID));
+        //            return;
+        //        }
 
-                var user = Service.GetUserByID(userID);
-                if (user == null)
-                {
-                    // The item wasn't found
-                    ModelState.AddModelError(String.Empty, String.Format("User with id {0} was not found", userID));
-                    return;
-                }
+        //        if (TryUpdateModel(user))
+        //        {
+        //            Service.SaveUser(user);
 
-                if (TryUpdateModel(user))
-                {
-                    Service.SaveUser(user);
-
-                    Response.RedirectToRoute("CarAdDetails", new { id = user.UserID });
-                    Context.ApplicationInstance.CompleteRequest();
+        //            Response.RedirectToRoute("CarAdDetails", new { id = user.UserID });
+        //            Context.ApplicationInstance.CompleteRequest();
 
 
-                }
-            }
-            catch
-            {
-                ModelState.AddModelError(String.Empty, "Fel inträffade då användren skulle uppdateras.");
-            }
-        }
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        ModelState.AddModelError(String.Empty, "Fel inträffade då användren skulle uppdateras.");
+        //    }
+        //}
 
     }
 }

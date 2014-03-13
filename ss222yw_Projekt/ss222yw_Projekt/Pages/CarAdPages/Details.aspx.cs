@@ -45,20 +45,55 @@ namespace ss222yw_Projekt.Pages.CarAdPages
             }
         }
 
+
+
+        public IEnumerable<CarBrand> CarBrandMethod_GetData()
+        {
+            Service service = new Service();
+            return service.GetCarBrand();
+
+        }
+
+        //// The id parameter should match the DataKeyNames value set on the control
+        //// or be decorated with a value provider attribute, e.g. [QueryString]int id
+        //public int CarAdID { get; set; }
+        //public IEnumerable<CarBrand> CarBrandFormView_GetItem()
+        //{
+        //    return Service.GetCarBrandByCarAdID(CarAdID);
+        //}
+
         // The id parameter should match the DataKeyNames value set on the control
         // or be decorated with a value provider attribute, e.g. [QueryString]int id
-        public ss222yw_Projekt.Model.User UserFormView_GetItem([RouteData]int id)
-        {
-            try
-            {
-                Service service = new Service();
-                return service.GetUserByID(id);
-            }
-            catch (Exception)
-            {
-                ModelState.AddModelError(String.Empty, "Fel inträffade då User hämtades.");
-                return null;
-            }
-        }
+        //public ss222yw_Projekt.Model.CarBrand CarBrandFormView_GetItem([RouteData]int id)
+        //{
+
+        //    try
+        //    {
+        //        Service service = new Service();
+        //        return service.GetCarBrandByCarAdID(id);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        ModelState.AddModelError(String.Empty, "Fel inträffade då CarBrand hämtades.");
+        //        return null;
+        //    }
+        //}
+
+        // The id parameter should match the DataKeyNames value set on the control
+        //// or be decorated with a value provider attribute, e.g. [QueryString]int id
+        //public ss222yw_Projekt.Model.CarBrand CarBrandFormView_GetItem([RouteData]int id)
+        //{
+
+        //    try
+        //    {
+        //        return Service.GetCarBrandByID(id);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        ModelState.AddModelError(String.Empty, "Fel inträffade då bilmärken hämtades vid redigering.");
+        //        return null;
+        //    }
+        //}
+
     }
 }

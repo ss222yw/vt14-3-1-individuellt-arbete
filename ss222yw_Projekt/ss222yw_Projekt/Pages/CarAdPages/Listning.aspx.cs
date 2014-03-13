@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.ModelBinding;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -41,20 +42,18 @@ namespace ss222yw_Projekt.Pages.CarAdPages
         //     int startRowIndex
         //     out int totalRowCount
         //     string sortByExpression
-        //public IQueryable<ss222yw_Projekt.Model.User> UserListView1_GetData()
-        //{
-        //    return null;
-        //}
-
-        // The return type can be changed to IEnumerable, however to support
-        // paging and sorting, the following parameters must be added:
-        //     int maximumRows
-        //     int startRowIndex
-        //     out int totalRowCount
-        //     string sortByExpression
-        //public IQueryable<ss222yw_Projekt.Model.CarBrand> CarBrandListView_GetData()
-        //{
-        //    return null;
-        //}
+        public IEnumerable<User> UserListView1_GetData()
+        {
+            try
+            {
+                Service service = new Service();
+                return service.GetUsers();
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(String.Empty, "Fel inträffade då Användaren hämtades.");
+                return null;
+            }
+        }
     }
 }

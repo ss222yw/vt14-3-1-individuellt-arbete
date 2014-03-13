@@ -4,10 +4,23 @@
         Bilannonser
     </h1>
 
+    <asp:FormView ID="UserFormView" runat="server"
+         ItemType="ss222yw_Projekt.Model.User"
+         RenderOuterTable="false"
+         SelectMethod="UserListView1_GetData">
+          <ItemTemplate>
+            <div class="editor-label">
+                <label for="Name"><strong>Välkommen</strong></label>
+               </div>
+              <div class="editor-field">
+                <%#: Item.Name %>
+            </div>
+        </ItemTemplate>
+    </asp:FormView>
 
     <asp:ValidationSummary runat="server" CssClass="validation-summary-errors"/>
      <div class="editor-field">
-        <asp:HyperLink runat="server" NavigateUrl='<%$ RouteUrl:routename=CarAdCreate %>' Text="Lägg till ny bilannons" />
+       
     </div>
     <asp:ListView ID="CarAdListView" runat="server" 
         ItemType="ss222yw_Projekt.Model.CarAd"

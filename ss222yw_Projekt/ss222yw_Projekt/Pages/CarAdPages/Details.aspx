@@ -42,28 +42,21 @@
             <div class="editor-field">
                 <%#: Item.Description %>
             </div>
-           
-        </ItemTemplate>
-    </asp:FormView>
-
-    <asp:FormView ID="UserFormView" runat="server"
-         ItemType="ss222yw_Projekt.Model.User"
-         RenderOuterTable="false"
-         SelectMethod="UserFormView_GetItem">
-          <ItemTemplate>
-              <span><strong>User</strong></span>
-            <div class="editor-label">
-                <label for="Name"><strong>Namn :</strong></label>
-               </div>
-              <div class="editor-field">
-                <%#: Item.Name %>
-            </div>
-            <div>
-                <asp:HyperLink  runat="server" Text="Redigera" NavigateUrl='<%# GetRouteUrl("CarAdEdit", new { id = Item.UserID }) %>' />
-                <asp:HyperLink  runat="server" Text="Ta bort" NavigateUrl='<%# GetRouteUrl("CarAdDelete", new { id = Item.UserID }) %>' />
-                <asp:HyperLink  runat="server" Text="Avbryt" NavigateUrl='<%# GetRouteUrl("CarAds", null)%>' />
+               <li>
+                <asp:DropDownList ID="CarBrandDropDownList" runat="server"
+                    SelectMethod="CarBrandMethod_GetData"
+                    DataTextField="BrandName"
+                    DataValueField="CarBrandID"
+                     Enabled="false"/>
+            </li>
+              
+           <div>
+                <asp:HyperLink ID="HyperLink1" runat="server" Text="Redigera" NavigateUrl='<%# GetRouteUrl("CarAdEdit", new { id = Item.CarAdID }) %>' />
+                <asp:HyperLink ID="HyperLink2" runat="server" Text="Ta bort" NavigateUrl='<%# GetRouteUrl("CarAdDelete", new { id = Item.CarAdID }) %>' />
+                <asp:HyperLink ID="HyperLink3" runat="server" Text="Avbryt" NavigateUrl='<%# GetRouteUrl("Default", null)%>' />
             </div>
         </ItemTemplate>
     </asp:FormView>
 </asp:Content>
+
 

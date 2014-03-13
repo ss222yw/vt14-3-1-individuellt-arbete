@@ -51,25 +51,4 @@
             </div>
         </EditItemTemplate>
         </asp:FormView>
-
-
-
-
-    <asp:FormView ID="UserFormView" runat="server" ItemType="ss222yw_Projekt.Model.User"
-         DataKeyNames="UserID" DefaultMode="Edit" RenderOuterTable="false" SelectMethod="UserFormView_GetItem"
-         UpdateMethod="UserFormView_UpdateItem">
-
-     <EditItemTemplate>
-            <div class="editor-label">
-                <label for="Name">Namn</label>
-            </div>
-            <div class="editor-field">
-                <asp:TextBox ID="Name" runat="server" Text='<%# BindItem.Name %>' />
-            </div>
-            <div>
-                <asp:LinkButton ID="LinkButton1" runat="server" Text="Spara namnet" CommandName="Update" />
-                <asp:HyperLink ID="HyperLink1" runat="server" Text="Avbryt" NavigateUrl='<%# GetRouteUrl("CarAdDetails", new { id = Item.UserID }) %>' />
-            </div>
-        </EditItemTemplate>
-        </asp:FormView>
 </asp:Content>

@@ -46,25 +46,12 @@ namespace ss222yw_Projekt.Pages.CarAdPages
             }
         }
 
-        public void UserFormView_InsertItem(User user)
+
+        public IEnumerable<CarBrand> CarBrandMethod_GetData()
         {
+            Service service = new Service();
+          return service.GetCarBrand();
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    Service service = new Service();
-                    service.SaveUser(user);
-
-                    Response.RedirectToRoute("CarAdCreate", new { id = user.UserID });
-                    Context.ApplicationInstance.CompleteRequest();
-                }
-                catch (Exception)
-                {
-                    ModelState.AddModelError(String.Empty, "Fel inträffade då Användaren skulle läggas till.");
-                }
-
-            }
         }
 
     }

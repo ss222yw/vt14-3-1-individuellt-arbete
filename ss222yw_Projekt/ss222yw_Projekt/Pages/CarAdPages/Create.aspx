@@ -47,31 +47,17 @@
             </div>
             <div>
                 <asp:LinkButton  runat="server" Text="Spara" CommandName="Insert" />
-                <asp:HyperLink  runat="server" Text="Avbryt" NavigateUrl='<%# GetRouteUrl("CarAds", null) %>' />
+                <asp:HyperLink  runat="server" Text="Avbryt" NavigateUrl='<%$ RouteUrl:routename=Default %>' />
             </div>
-        </InsertItemTemplate>
-    </asp:FormView>
+
+               <li>
+                <asp:DropDownList ID="CarBrandDropDownList" runat="server"
+                    SelectMethod="CarBrandMethod_GetData"
+                    DataTextField="BrandName"
+                    DataValueField="CarBrandID"/>
+            </li>
 
 
-
-
-
-
-     <asp:FormView ID="UserFormView" runat="server" ItemType="ss222yw_Projekt.Model.User"
-         DefaultMode="Insert"
-         RenderOuterTable="false"
-         InsertMethod="UserFormView_InsertItem">
-         <InsertItemTemplate>
-            <div class="editor-label">
-                <label for="Name">Namn</label>
-            </div>
-            <div class="editor-field">
-                <asp:TextBox ID="Name" runat="server" Text='<%# BindItem.Name %>' />
-            </div>
-            <div>
-                <asp:LinkButton ID="LinkButton1" runat="server" Text="Spara" CommandName="Insert" />
-           <asp:HyperLink ID="HyperLink1" runat="server" Text="Avbryt" NavigateUrl='<%# GetRouteUrl("CarAds", null) %>' />
-           </div>
         </InsertItemTemplate>
     </asp:FormView>
 </asp:Content>
