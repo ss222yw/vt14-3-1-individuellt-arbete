@@ -13,7 +13,9 @@ namespace ss222yw_Projekt.Pages.CarAdPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+             // Om det finns något meddelande i extension-metoden så hämtas det
+            MessageLiteral.Text = Page.GetTempData("Message") as string;
+            MessagePanel.Visible = !String.IsNullOrWhiteSpace(MessageLiteral.Text);
         }
 
         // The return type can be changed to IEnumerable, however to support

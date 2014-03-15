@@ -39,6 +39,8 @@ namespace ss222yw_Projekt.Model.DAL
                         var priceIndex = reader.GetOrdinal("Price");
                         var descriptionIndex = reader.GetOrdinal("Description");
                         var dateIndex = reader.GetOrdinal("Date");
+                        var carBrandIDIndex = reader.GetOrdinal("CarBrandID");
+                        var userIDIndex = reader.GetOrdinal("UserID");
 
 
                         // Så länge som det finns poster att läsa returnerar Read true annars false.
@@ -53,7 +55,9 @@ namespace ss222yw_Projekt.Model.DAL
                                 CarColor = reader.GetString(carColorIndex),
                                 Price = reader.GetDecimal(priceIndex),
                                 Description = reader.GetString(descriptionIndex),
-                                Date = reader.GetDateTime(dateIndex)
+                                Date = reader.GetDateTime(dateIndex),
+                                CarBrandID = reader.GetByte(carBrandIDIndex),
+                                UserID = reader.GetInt32(userIDIndex)
                             });
                         }
 
@@ -88,10 +92,8 @@ namespace ss222yw_Projekt.Model.DAL
                     SqlCommand cmd = new SqlCommand("appSchema.uspGetCarAdByID", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@CarAdID", carAdID);
-
-                    ////Lägger till den paramter den lagrade proceduren kräver.
-                    //cmd.Parameters.Add("@CarAdID", SqlDbType.Int, 4).Value = carAdID;
+                    //Lägger till den paramter den lagrade proceduren kräver.
+                    cmd.Parameters.Add("@CarAdID", SqlDbType.Int, 4).Value = carAdID;
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();
@@ -104,8 +106,6 @@ namespace ss222yw_Projekt.Model.DAL
                             // Tar reda på vilket index de olika kolumnerna har.
                             int carAdIDIndex = reader.GetOrdinal("CarAdID");
                             int headerIndex = reader.GetOrdinal("Header");
-                            //var carBrandIDIndex = reader.GetOrdinal("CarBrandID");
-                            //var userIDIndex = reader.GetOrdinal("UserID");
                             int modelYearIndex = reader.GetOrdinal("ModelYear");
                             int carColorIndex = reader.GetOrdinal("CarColor");
                             int priceIndex = reader.GetOrdinal("Price");
@@ -116,8 +116,6 @@ namespace ss222yw_Projekt.Model.DAL
                             {
                                 CarAdID = reader.GetInt32(carAdIDIndex),
                                 Header = reader.GetString(headerIndex),
-                                //CarBrandID = reader.GetInt32(carBrandIDIndex),
-                                //UserID = reader.GetInt32(userIDIndex),
                                 ModelYear = reader.GetString(modelYearIndex),
                                 CarColor = reader.GetString(carColorIndex),
                                 Price = reader.GetDecimal(priceIndex),
@@ -140,7 +138,7 @@ namespace ss222yw_Projekt.Model.DAL
 
 
         //Skapar en ny CarAd i tabellen CarAd.
-        public void InsertCarAd(CarAd carAd)
+        public void InsertCarAd(CarAd carAd, int id)
         {
             // Skapar och initierar ett anslutningsobjekt.
             using (SqlConnection conn = CreateConnection())
@@ -157,7 +155,7 @@ namespace ss222yw_Projekt.Model.DAL
                     cmd.Parameters.Add("@ModelYear", SqlDbType.Char, 4).Value = carAd.ModelYear;
                     cmd.Parameters.Add("@Description", SqlDbType.VarChar, 500).Value = carAd.Description;
                     cmd.Parameters.Add("@Price", SqlDbType.Decimal).Value = carAd.Price;
-
+                    cmd.Parameters.Add("@CarBrandID", SqlDbType.TinyInt, 1).Value = id;
                     // Lägger till de paramterar den lagrade proceduren kräver.
                     cmd.Parameters.Add("@CarAdID", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
 
@@ -165,12 +163,10 @@ namespace ss222yw_Projekt.Model.DAL
                     // Öppnar anslutningen till databasen.
                     conn.Open();
 
-                    // Den lagrade proceduren innehåller en INSERT-sats och returnerar inga poster varför metoden 
                     // ExecuteNonQuery används för att exekvera den lagrade proceduren
                     cmd.ExecuteNonQuery();
 
                     // Hämtar primärnyckelns värde för den nya posten och tilldelar CarAd-objektet värdet.
-                    //carAd.CarAdID = (int)cmd.Parameters["@UserID"].Value;
                     carAd.CarAdID = (int)cmd.Parameters["@CarAdID"].Value;
 
                 }
@@ -184,7 +180,7 @@ namespace ss222yw_Projekt.Model.DAL
 
 
         //Uppdaterar en CarAd i tabellen CarAd.
-        public void UpdateCarAd(CarAd carAd)
+        public void UpdateCarAd(CarAd carAd, int id)
         {
             // Skapar och initierar ett anslutningsobjekt.
             using (SqlConnection conn = CreateConnection())
@@ -207,7 +203,6 @@ namespace ss222yw_Projekt.Model.DAL
                     // Öppnar anslutningen till databasen.
                     conn.Open();
 
-                    // Den lagrade proceduren innehåller en INSERT-sats och returnerar inga poster varför metoden 
                     // ExecuteNonQuery används för att exekvera den lagrade proceduren
                     cmd.ExecuteNonQuery();
                 }
@@ -236,7 +231,6 @@ namespace ss222yw_Projekt.Model.DAL
                     // Öppnar anslutningen till databasen.
                     conn.Open();
 
-                    // Den lagrade proceduren innehåller en INSERT-sats och returnerar inga poster varför metoden 
                     // ExecuteNonQuery används för att exekvera den lagrade proceduren
                     cmd.ExecuteNonQuery();
                 }

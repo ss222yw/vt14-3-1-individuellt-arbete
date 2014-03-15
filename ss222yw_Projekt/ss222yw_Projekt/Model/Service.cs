@@ -1,6 +1,7 @@
 ﻿using ss222yw_Projekt.Model.DAL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -37,10 +38,10 @@ namespace ss222yw_Projekt.Model
 
 
         // Hämtar CarBrand med ett specifikt nummer från databasen.
-        //public CarBrand GetCarBrandByID(int carBrandID)
-        //{
-        //    return CarBrandDAL.GetCarBrandByID(carBrandID);
-        //}
+        public CarBrand GetCarBrandByID(int carBrandID)
+        {
+            return CarBrandDAL.GetCarBrandByID(carBrandID);
+        }
 
 
         // Tar bort specifierad CarBrandUppgifter ur databasen.
@@ -63,6 +64,15 @@ namespace ss222yw_Projekt.Model
 
         public void SaveCarBrand(CarBrand carBrand)
         {
+            // Validering på affärslogiklagret
+            ICollection<ValidationResult> validationResults;
+            if (!carBrand.Validate(out validationResults))
+            {
+                // kastas ett undantag med ett allmänt felmeddelande samt en referens till samlingen med resultat av valideringen
+                var ex = new ValidationException("Objektet klarade inte valideringen.");
+                ex.Data.Add("ValidationResults", validationResults);
+                throw ex;
+            }
             // Contact-objektet sparas antingen genom att en ny post 
             // skapas eller genom att en befintlig post uppdateras.
             if (carBrand.CarBrandID == 0)
@@ -119,24 +129,34 @@ namespace ss222yw_Projekt.Model
         }
 
         //Spara CarAd efter uppdatering eller Insert.
-        public void SaveCarAd(CarAd carAd)
+        public void SaveCarAd(CarAd carAd, int id)
         {
-            // Contact-objektet sparas antingen genom att en ny post 
+            // Validering på affärslogiklagret
+            ICollection<ValidationResult> validationResults;
+            if (!carAd.Validate(out validationResults))
+            {
+                // kastas ett undantag med ett allmänt felmeddelande samt en referens till samlingen med resultat av valideringen
+                var ex = new ValidationException("Objektet klarade inte valideringen.");
+                ex.Data.Add("ValidationResults", validationResults);
+                throw ex;
+            }
+            // CarAd-objektet sparas antingen genom att en ny post 
             // skapas eller genom att en befintlig post uppdateras.
             if (carAd.CarAdID == 0)
             {
-                CarAdDAL.InsertCarAd(carAd);
+                CarAdDAL.InsertCarAd(carAd, id);
             }
             else
             {
-                CarAdDAL.UpdateCarAd(carAd);
+                CarAdDAL.UpdateCarAd(carAd,id);
             }
         }
 
 
-        //public List<CarBrand> GetCarBrandByCarAdID(int caradID)
-        //{
-        //    return CarBrandDAL.GetCarBrandByCarAdID(caradID);
-        //}
+        public CarBrand GetCarBrandByCarAdID(int id)
+        {
+            return CarBrandDAL.GetCarBrandByCarAdID(id);
+        }
+
     }
 }

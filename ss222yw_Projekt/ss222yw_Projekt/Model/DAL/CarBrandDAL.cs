@@ -9,7 +9,70 @@ namespace ss222yw_Projekt.Model.DAL
 {
     public class CarBrandDAL : DALBase
     {
-        // Hämtar alla CarBrand i databasen.
+
+        public CarBrand GetCarBrandByCarAdID(int carAdID)
+        {
+            // Skapar ett anslutningsobjekt.
+            using (var conn = CreateConnection())
+            {
+                try
+                {
+                    // exekveras specifierad lagrad procedur.
+                    var cmd = new SqlCommand("appSchema.usp_GetCarBrandByCarAdID", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@CarAdID", carAdID);
+
+                    // Skapar det List-objekt som initialt har plats för 10 referenser till Contact-objekt.
+                    CarBrand carBrands = new CarBrand();
+
+                    // Öppnar anslutningen till databasen.
+                    conn.Open();
+
+                    // SqlDataReader-objekt och returnerar en referens till objektet.
+                    using (var reader = cmd.ExecuteReader())
+                    {
+            
+                        var carBrandIDIdIndex = reader.GetOrdinal("CarBrandID");
+                        var brandNameIndex = reader.GetOrdinal("BrandName");
+
+
+                        if (reader.Read())
+                        {
+                           
+                            return(new CarBrand
+                            {
+                     
+                                CarBrandID = reader.GetByte(carBrandIDIdIndex),
+                                BrandName = reader.GetString(brandNameIndex)
+
+                            });
+                        }
+                    }
+                    return null;
+                }
+                catch
+                {
+                    // Kastar ett eget undantag om ett undantag kastas.
+                    throw new ApplicationException("Fel! Det gick inte att hämta carbrands via caradid");
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //    // Hämtar alla CarBrand i databasen.
         public IEnumerable<CarBrand> GetCarBrand()
         {
             // Skapar ett anslutningsobjekt.
@@ -17,12 +80,12 @@ namespace ss222yw_Projekt.Model.DAL
             {
                 try
                 {
-                    // Skapar och initierar ett SqlCommand-objekt som används till att 
+                  
                     // exekveras specifierad lagrad procedur.
                     var cmd = new SqlCommand("appschema.usp_GetCarBrand", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    // Skapar det List-objekt som initialt har plats för 20 referenser till ContactType-objekt.
+                    // Skapar det List-objekt som initialt har plats för 20 referenser till CarBrand-objekt.
                     List<CarBrand> carBrands = new List<CarBrand>(20);
 
                     // Öppnar anslutningen till databasen.
@@ -38,8 +101,7 @@ namespace ss222yw_Projekt.Model.DAL
                         // Så länge som det finns poster att läsa returnerar Read true annars false.
                         while (reader.Read())
                         {
-                            // Hämtar ut datat för en post. Använder GetXxx-metoder - vilken beror av typen av data.
-                            // Du måste känna till SQL-satsen för att kunna välja rätt GetXxx-metod.
+                          
                             carBrands.Add(new CarBrand
                             {
                                 CarBrandID = reader.GetByte(CarBrandIDIndex),
@@ -53,7 +115,7 @@ namespace ss222yw_Projekt.Model.DAL
                     //Avallokerar minne som inte används.
                     carBrands.TrimExcess();
 
-                    // Returnerar referensen till List-objektet med referenser med ContactType-objekt.
+                    // Returnerar referensen till List-objektet med referenser med CarBrand-objekt.
                     return carBrands;
                 }
                 catch
@@ -65,54 +127,58 @@ namespace ss222yw_Projekt.Model.DAL
         }
 
 
-        //// Hämtar user en i taget .
-        //public CarBrand GetCarBrandByID(int carBrandID)
-        //{
-        //    //Skapar en anslutningsobjekt.
-        //    using (SqlConnection conn = CreateConnection())
-        //    {
-        //        try
-        //        {
-        //            // Skapar ett SqlCommand-objekt för att exekvera specifierad lagrad procedur.
-        //            SqlCommand cmd = new SqlCommand("appSchema.uspGetCarBrandByID", conn);
-        //            cmd.CommandType = CommandType.StoredProcedure;
-
-        //            //Lägger till den paramter den lagrade proceduren kräver.
-        //            //cmd.Parameters.Add("@CarBrandID", SqlDbType.Int, 4).Value = carBrandID;
-        //            cmd.Parameters.AddWithValue("@CarBrandID", carBrandID);
-
-        //            // Öppnar anslutningen till databasen.
-        //            conn.Open();
-
-        //            // Skapar ett SqlDataReader-objekt och returnerar en referens till objektet.
-        //            using (SqlDataReader reader = cmd.ExecuteReader())
-        //            {
-        //                if (reader.Read())
-        //                {
-        //                    // Tar reda på vilket index de olika kolumnerna har.
-        //                    var carBrandIDIndex = reader.GetOrdinal("CarBrandID");
-        //                    var brandNameIndex = reader.GetOrdinal("BrandName");
 
 
-        //                    // Returnerar referensen till de skapade User-objektet.
-        //                    return new CarBrand
-        //                    {
-        //                        CarBrandID = reader.GetByte(carBrandIDIndex),
-        //                        BrandName = reader.GetString(brandNameIndex),
 
-        //                    };
-        //                }
-        //            }
-        //            return null;
-        //        }
 
-        //        catch
-        //        {
-        //            // Kastar ett eget undantag om ett undantag kastas.
-        //            throw new ApplicationException("An error occured in the data access layer.");
-        //        }
-        //    }
-        //}
+        // Hämtar CarBrand en i taget .
+        public CarBrand GetCarBrandByID(int carBrandID)
+        {
+            //Skapar en anslutningsobjekt.
+            using (SqlConnection conn = CreateConnection())
+            {
+                try
+                {
+                    //Skapar ett SqlCommand-objekt för att exekvera specifierad lagrad procedur.
+                    SqlCommand cmd = new SqlCommand("appSchema.uspGetCarBrandByID", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    //Lägger till den paramter den lagrade proceduren kräver.
+                    cmd.Parameters.Add("@CarBrandID", SqlDbType.TinyInt, 1).Value = carBrandID;
+
+
+                    //Öppnar anslutningen till databasen.
+                    conn.Open();
+
+                    //Skapar ett SqlDataReader-objekt och returnerar en referens till objektet.
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            //Tar reda på vilket index de olika kolumnerna har.
+                            var carBrandIDIndex = reader.GetOrdinal("CarBrandID");
+                            var brandNameIndex = reader.GetOrdinal("BrandName");
+
+
+                            //Returnerar referensen till de skapade CarBrand-objektet.
+                            return new CarBrand
+                            {
+                                CarBrandID = reader.GetByte(carBrandIDIndex),
+                                BrandName = reader.GetString(brandNameIndex),
+
+                            };
+                        }
+                    }
+                    return null;
+                }
+
+                catch
+                {
+                    //Kastar ett eget undantag om ett undantag kastas.
+                    throw new ApplicationException("An error occured in the data access layer.");
+                }
+            }
+        }
 
 
 
@@ -132,7 +198,7 @@ namespace ss222yw_Projekt.Model.DAL
                     cmd.Parameters.Add("@BrandName", SqlDbType.VarChar, 40).Value = carBrand.BrandName;
 
                     // Lägger till de paramterar den lagrade proceduren kräver.
-                    cmd.Parameters.Add("@CarBrandID", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@CarBrandID", SqlDbType.TinyInt, 1).Direction = ParameterDirection.Output;
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();
@@ -141,7 +207,7 @@ namespace ss222yw_Projekt.Model.DAL
                     // ExecuteNonQuery används för att exekvera den lagrade proceduren
                     cmd.ExecuteNonQuery();
 
-                    // Hämtar primärnyckelns värde för den nya posten och tilldelar User-objektet värdet.
+                    // Hämtar primärnyckelns värde för den nya posten och tilldelar CarBrand-objektet värdet.
                     carBrand.CarBrandID = (int)cmd.Parameters["@CarBrandID"].Value;
                 }
                 catch
@@ -170,8 +236,7 @@ namespace ss222yw_Projekt.Model.DAL
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();
-
-                    // Den lagrade proceduren innehåller en INSERT-sats och returnerar inga poster varför metoden 
+ 
                     // ExecuteNonQuery används för att exekvera den lagrade proceduren
                     cmd.ExecuteNonQuery();
                 }
@@ -183,7 +248,7 @@ namespace ss222yw_Projekt.Model.DAL
             }
         }
 
-        //Tar bort en User .
+        //Tar bort en CarBrand .
         public void DeleteCarBrand(int carBrand)
         {
             using (SqlConnection conn = CreateConnection())
@@ -195,12 +260,12 @@ namespace ss222yw_Projekt.Model.DAL
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Lägger till den paramter den lagrade proceduren kräver.
-                    cmd.Parameters.Add("@CarBrandID", SqlDbType.Int, 4).Value = carBrand;
+                    cmd.Parameters.Add("@CarBrandID", SqlDbType.TinyInt, 1).Value = carBrand;
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();
 
-                    // Den lagrade proceduren innehåller en INSERT-sats och returnerar inga poster varför metoden 
+
                     // ExecuteNonQuery används för att exekvera den lagrade proceduren
                     cmd.ExecuteNonQuery();
                 }

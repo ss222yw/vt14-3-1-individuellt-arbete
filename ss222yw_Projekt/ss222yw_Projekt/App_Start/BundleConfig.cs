@@ -17,8 +17,9 @@ namespace ss222yw_Projekt
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/reset.css",
                 "~/Content/typographic-base.css",
-                "~/Content/site.css"
+                "~/Content/Style.css"
             ));
         }
     }
+
 }

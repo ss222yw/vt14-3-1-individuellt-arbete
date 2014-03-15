@@ -19,10 +19,9 @@ namespace ss222yw_Projekt.Pages.CarAdPages
             get { return _service ?? (_service = new Service()); }
         }
 
-        //protected void Page_Load(object sender, EventArgs e)
-        //{
-
-        //}
+        protected void Page_Load(object sender, EventArgs e)
+        {
+        }
 
         // The id parameter should match the DataKeyNames value set on the control
         // or be decorated with a value provider attribute, e.g. [QueryString]int id
@@ -40,23 +39,23 @@ namespace ss222yw_Projekt.Pages.CarAdPages
         }
 
         // The id parameter name should match the DataKeyNames value set on the control
-        public void CarAdFormView_UpdateItem(int CarAdID)
+        public void CarAdFormView_UpdateItem([RouteData]int id)
         {
             try
             {
 
-                var carAd = Service.GetCarAdByID(CarAdID);
+                var carAd = Service.GetCarAdByID(id);
                     if (carAd == null)
                 {
                     // The item wasn't found
-                    ModelState.AddModelError(String.Empty, String.Format("CarAd with id {0} was not found", CarAdID));
+                    ModelState.AddModelError(String.Empty, String.Format("CarAd with id {0} was not found", id));
                     return;
                 }
 
                 if (TryUpdateModel(carAd))
                 {
-                    Service.SaveCarAd(carAd);
-
+                    Service.SaveCarAd(carAd, id);
+                    Page.SetTempData("Message", "Bilannonsen har uppdaterats.");
                     Response.RedirectToRoute("CarAdDetails", new { id = carAd.CarAdID });
                     Context.ApplicationInstance.CompleteRequest();
 
@@ -68,37 +67,6 @@ namespace ss222yw_Projekt.Pages.CarAdPages
                 ModelState.AddModelError(String.Empty, "Fel inträffade då bilannonsen skulle uppdateras.");
             }
         }
-
-      
-        //// The id parameter name should match the DataKeyNames value set on the control
-        //public void UserFormView_UpdateItem(int userID)
-        //{
-        //    try
-        //    {
-
-        //        var user = Service.GetUserByID(userID);
-        //        if (user == null)
-        //        {
-        //            // The item wasn't found
-        //            ModelState.AddModelError(String.Empty, String.Format("User with id {0} was not found", userID));
-        //            return;
-        //        }
-
-        //        if (TryUpdateModel(user))
-        //        {
-        //            Service.SaveUser(user);
-
-        //            Response.RedirectToRoute("CarAdDetails", new { id = user.UserID });
-        //            Context.ApplicationInstance.CompleteRequest();
-
-
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        ModelState.AddModelError(String.Empty, "Fel inträffade då användren skulle uppdateras.");
-        //    }
-        //}
 
     }
 }

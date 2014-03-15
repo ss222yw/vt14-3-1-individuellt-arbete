@@ -3,7 +3,7 @@
     <h1>
         Redigera Bilannons
     </h1>
-
+   
 
     <asp:ValidationSummary  runat="server" CssClass="validation-summary-errors" />
     <asp:FormView ID="CarAdFormView" runat="server" 
@@ -46,9 +46,10 @@
                 <asp:TextBox ID="Description" runat="server" Text='<%# BindItem.Description %>' />
             </div>
             <div>
-                <asp:LinkButton ID="LinkButton1" runat="server" Text="Spara annonsen" CommandName="Update" CausesValidation="false" />
-                <asp:HyperLink ID="HyperLink1" runat="server" Text="Avbryt"  NavigateUrl='<%# GetRouteUrl("CarAdDetails", new { id = Item.CarAdID }) %>' />
+                <asp:LinkButton ID="LinkButton1" runat="server" Text="Spara annonsen" CommandName="Update" CausesValidation="false"  CssClass="Green"/>
+                <asp:HyperLink ID="HyperLink1" runat="server" Text="Avbryt"  NavigateUrl='<%# GetRouteUrl("CarAdDetails", new { id = Item.CarAdID }) %>' CssClass="Green" />
             </div>
         </EditItemTemplate>
+
         </asp:FormView>
 </asp:Content>

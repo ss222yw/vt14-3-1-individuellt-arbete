@@ -12,7 +12,7 @@ namespace ss222yw_Projekt.Pages.CarAdPages
     {
 
 
-        private Service _service;
+        private Service _service;   
 
 
         private Service Service
@@ -20,21 +20,35 @@ namespace ss222yw_Projekt.Pages.CarAdPages
             get { return _service ?? (_service = new Service()); }
         }
 
-        //protected void Page_Load(object sender, EventArgs e)
-        //{
+        public int CarBrandID { get; set; }
 
-        //}
+        public IEnumerable<CarBrand> CarBrandMethod_GetData()
+        {
+            Service service = new Service();
+            return service.GetCarBrand();
+       
+        }
 
         public void CarAdFormView_InsertItem(CarAd carAd)
         {
-    
+            var carBrandsIDs = 0;
+            DropDownList cb = (DropDownList)CarAdFormView.FindControl("CarBrandDropDownList");
+            foreach (ListItem bm in cb.Items)
+            {
+                if (bm.Selected)
+                {
+                     carBrandsIDs = int.Parse(bm.Value);
+                    
+                }
+            }
             if (ModelState.IsValid)
             {
                 try
                 {
                     Service service = new Service();
-                    service.SaveCarAd(carAd);
-
+                    carAd.CarBrandID = CarBrandID;
+                    service.SaveCarAd(carAd, carBrandsIDs);
+                    Page.SetTempData("Message", "Bilannonsen har lades till.");
                     Response.RedirectToRoute("CarAdDetails", new { id = carAd.CarAdID });
                     Context.ApplicationInstance.CompleteRequest();
                 }
@@ -44,14 +58,6 @@ namespace ss222yw_Projekt.Pages.CarAdPages
                 }
 
             }
-        }
-
-
-        public IEnumerable<CarBrand> CarBrandMethod_GetData()
-        {
-            Service service = new Service();
-          return service.GetCarBrand();
-
         }
 
     }
