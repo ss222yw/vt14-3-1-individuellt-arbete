@@ -10,7 +10,7 @@ namespace ss222yw_Projekt.Model.DAL
     public class CarAdDAL : DALBase
     {
 
-        //Hämtar alla CarAdS i databasen.
+        //Hämtar alla bilannonser i databasen.
         public IEnumerable<CarAd> GetCarAds()
         {
             //Skapar ett anslutningsobjekt.
@@ -18,7 +18,7 @@ namespace ss222yw_Projekt.Model.DAL
             {
                 try
                 {
-                    // Skapar det List-objekt som initialt har plats för 100 referenser till CarAd-objekt.
+                    // Skapar det List-objekt som initialt har plats för 100 referenser till CarAd-objeket.
                     var carAds = new List<CarAd>(100);
 
                     // Skapar ett SqlCommand-objekt för att exekvera specifierad lagrad procedur. 
@@ -80,7 +80,7 @@ namespace ss222yw_Projekt.Model.DAL
 
 
 
-        // Hämtar CarAd en i taget .
+        // Hämtar CarAd en i taget via id.
         public CarAd GetCarAdByID(int carAdID)
         {
             //Skapar en anslutningsobjekt.
@@ -111,6 +111,7 @@ namespace ss222yw_Projekt.Model.DAL
                             int priceIndex = reader.GetOrdinal("Price");
                             int descriptionIndex = reader.GetOrdinal("Description");
                             int dateIndex = reader.GetOrdinal("Date");
+                            int userIndex = reader.GetOrdinal("UserID");
                             // Returnerar referensen till de skapade CarAd-objektet.
                             return new CarAd
                             {
@@ -120,7 +121,8 @@ namespace ss222yw_Projekt.Model.DAL
                                 CarColor = reader.GetString(carColorIndex),
                                 Price = reader.GetDecimal(priceIndex),
                                 Description = reader.GetString(descriptionIndex),
-                                Date = reader.GetDateTime(dateIndex)
+                                Date = reader.GetDateTime(dateIndex),
+                                UserID = reader.GetInt32(userIndex)
                             };
                         }
                     }
@@ -129,7 +131,7 @@ namespace ss222yw_Projekt.Model.DAL
 
                 catch
                 {
-                    // Kastar ett eget undantag om ett undantag kastas.
+
                     throw new ApplicationException("An error occured in the data access layer.");
                 }
             }
@@ -163,7 +165,7 @@ namespace ss222yw_Projekt.Model.DAL
                     // Öppnar anslutningen till databasen.
                     conn.Open();
 
-                    // ExecuteNonQuery används för att exekvera den lagrade proceduren
+                    // Exekvera den lagrade proceduren
                     cmd.ExecuteNonQuery();
 
                     // Hämtar primärnyckelns värde för den nya posten och tilldelar CarAd-objektet värdet.
@@ -172,14 +174,14 @@ namespace ss222yw_Projekt.Model.DAL
                 }
                 catch
                 {
-                    // Kastar ett eget undantag om ett undantag kastas.
+
                     throw new ApplicationException("An error occured in the data access layer.");
                 }
             }
         }
 
 
-        //Uppdaterar en CarAd i tabellen CarAd.
+        //Uppdaterar en CarAd
         public void UpdateCarAd(CarAd carAd, int id)
         {
             // Skapar och initierar ett anslutningsobjekt.
@@ -198,6 +200,7 @@ namespace ss222yw_Projekt.Model.DAL
                     cmd.Parameters.Add("@ModelYear", SqlDbType.Char, 4).Value = carAd.ModelYear;
                     cmd.Parameters.Add("@Description", SqlDbType.VarChar, 500).Value = carAd.Description;
                     cmd.Parameters.Add("@Price", SqlDbType.Decimal).Value = carAd.Price;
+                    cmd.Parameters.Add("@CarBrandID", SqlDbType.TinyInt, 1).Value = id;
 
 
                     // Öppnar anslutningen till databasen.
@@ -231,15 +234,68 @@ namespace ss222yw_Projekt.Model.DAL
                     // Öppnar anslutningen till databasen.
                     conn.Open();
 
-                    // ExecuteNonQuery används för att exekvera den lagrade proceduren
+                    // Exekvera den lagrade proceduren
                     cmd.ExecuteNonQuery();
                 }
                 catch
                 {
-                    // Kastar ett eget undantag om ett undantag kastas.
+
                     throw new ApplicationException("An error occured in the data access layer.");
                 }
             }
+
+
         }
+
+        //Hämtar Header från User.
+        public List<CarAd> GetCarAdByUserID(int userID)
+        {
+            // Skapar ett anslutningsobjekt.
+            using (var conn = CreateConnection())
+            {
+                try
+                {
+                    // exekveras specifierad lagrad procedur.
+                    var cmd = new SqlCommand("appSchema.uspGetUserByCarAdID", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@UserID", userID);
+
+                    var carAds = new List<CarAd>();
+
+                    // Öppnar anslutningen till databasen.
+                    conn.Open();
+
+                    // SqlDataReader-objekt och returnerar en referens till objektet.
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        var userIDIdIndex = reader.GetOrdinal("UserID");
+                        var nameIndex = reader.GetOrdinal("Header");
+                        var carAdIDIndex = reader.GetOrdinal("CarAdID");
+
+
+                        while (reader.Read())
+                        {
+
+                            carAds.Add(new CarAd
+                            {
+
+                                UserID = reader.GetInt32(userIDIdIndex),
+                                Header = reader.GetString(nameIndex),
+                                CarAdID = reader.GetInt32(carAdIDIndex)
+
+                            });
+                        }
+                    }
+                    return carAds;
+                }
+                catch
+                {
+                    throw new ApplicationException("Fel! Det gick inte att hämta USER via caradid");
+                }
+            }
+        }
+
     }
 }

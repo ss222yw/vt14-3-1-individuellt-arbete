@@ -15,13 +15,13 @@ namespace ss222yw_Projekt.Model
 
 
 
-
+        [Required(ErrorMessage = "Beskriv din annosn!")]
         [StringLength(500, ErrorMessage = "Beskrivning kan bestå av som mest 500 tecken.")]
         public string Description { get; set; }
 
 
         [Required(ErrorMessage = "Priset måste anges!")]
-        [RegularExpression(@"\d*[.]?\d+", ErrorMessage = "Priset verkar inte vara Korrekt.")]
+        [RegularExpression(@"^(\d*([.,](?=\d{3}))?\d+)+((?!\2)[.,]\d\d)?$", ErrorMessage = "Priset verkar inte vara Korrekt.")]
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Rubriken måste anges.")]

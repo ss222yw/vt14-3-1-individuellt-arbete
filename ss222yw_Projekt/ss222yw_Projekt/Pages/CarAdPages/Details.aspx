@@ -8,9 +8,7 @@
         <asp:Literal runat="server" ID="MessageLiteral" />
         <asp:ImageButton ID="ImageCloseButton" runat="server" ImageUrl="~/Images/Close.png" CausesValidation="False" CssClass="closebutton"/>
     </asp:Panel>
-
-    <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="validation-summary-errors" />
-
+ 
     <asp:FormView ID="CarAdView" runat="server"
          ItemType="ss222yw_Projekt.Model.CarAd"
          RenderOuterTable="false"
@@ -54,16 +52,7 @@
                 <%#: Item.Date %>
             </div>
               
-           <div>
-                <asp:HyperLink ID="HyperLink1" runat="server" Text="Redigera" NavigateUrl='<%# GetRouteUrl("CarAdEdit", new { id = Item.CarAdID }) %>' CssClass="Green"/>
-                <asp:HyperLink ID="HyperLink2" runat="server" Text="Ta bort" NavigateUrl='<%# GetRouteUrl("CarAdDelete", new { id = Item.CarAdID }) %>'  CssClass="Green"/>
-                <asp:HyperLink ID="HyperLink3" runat="server" Text="Avbryt" NavigateUrl='<%# GetRouteUrl("CarAd", null)%>'  CssClass="Green"/>
-            </div>
-        </ItemTemplate>
-       
-    </asp:FormView>
-
-   <asp:ListView ID="CarBrandListView" runat="server"
+               <asp:ListView ID="CarBrandListView" runat="server"
         ItemType="ss222yw_Projekt.Model.CarBrand"
         DataKeyNames="CarBrandID"
         SelectMethod="GetCarBrandByCarAdID"
@@ -87,6 +76,14 @@
   
         </ItemTemplate>
           </asp:ListView>
+           <div>
+                <asp:HyperLink ID="HyperLink1" runat="server" Text="Redigera" NavigateUrl='<%# GetRouteUrl("CarAdEdit", new { id = Item.CarAdID }) %>' CssClass="Green"/>
+                <asp:HyperLink ID="HyperLink2" runat="server" Text="Ta bort" NavigateUrl='<%# GetRouteUrl("CarAdDelete", new { id = Item.CarAdID, id1 = Item.UserID }) %>'  CssClass="Green"/>
+                <asp:HyperLink ID="HyperLink3" runat="server" Text="Avbryt" NavigateUrl='<%# GetRouteUrl("CarAd", new { id = Item.UserID } )%>'  CssClass="Green"/>
+            </div>
+
+        </ItemTemplate>
+    </asp:FormView>
 </asp:Content>
 
 

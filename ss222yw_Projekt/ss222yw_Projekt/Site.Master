@@ -13,21 +13,24 @@
 
 </head>
 <body>
+      <div>
+        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%$ RouteUrl:routename=Logga %>' Text="SellYourCarFastAB" CssClass="SitMasterColor" />
 
+    </div>
     <form id="TheForm" runat="server">
   
     <header>
-         <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%$ RouteUrl:routename=Default %>' Text="Hem"  CssClass="SitMasterColor"/>
         <div class="content-wrapper">
            
                 <h1 class="site-title">
-                    SellYourCarFast AB
+                   Välkommen till SellYourCarFast AB
                 </h1>
             </div>
        
     </header>
     <div id="body">
         <asp:ContentPlaceHolder ID="MainContentPlaceHolder" runat="server" />
+       
     </div>
     <footer>
         <div class="content-wrapper">

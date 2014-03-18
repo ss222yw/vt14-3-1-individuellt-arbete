@@ -1,21 +1,28 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Users.aspx.cs" Inherits="ss222yw_Projekt.Pages.CarAdPages.Users" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
+    <span><strong>Inloggad</strong></span>
+        <div>
+        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%$ RouteUrl:routename=Logga %>' Text="Logga ut" CssClass="SitMasterColor" />
 
-     <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="validation-summary-errors" />
+    </div>
+    <div>
+        <asp:Button ID="Button1" runat="server" Text="Mina sidor" OnClick="Button1_Click" CssClass="Blue" />
+    </div>
 
-    <asp:FormView ID="UserFormView" runat="server" ItemType="ss222yw_Projekt.Model.User" RenderOuterTable="false" SelectMethod="UsersDropDown_GetData1">
+    <asp:FormView ID="CarAdFormView" runat="server"
+        ItemType="ss222yw_Projekt.Model.CarAd"
+        RenderOuterTable="false"
+        SelectMethod="CarAdFormView_GetItem">
         <ItemTemplate>
-             <li>
-    <asp:DropDownList ID="UsersDropDownList" runat="server"         
-         DataTextField="Name"
-         DataValueField="UserID"
-        SelectMethod="UsersDropDown_GetData"
-          />
-                 </li>
-            <div>
-                <asp:HyperLink ID="HyperLink1" runat="server" Text="Gå vidare"   NavigateUrl='<%# GetRouteUrl("CarAd", new { id = Item.UserID }) %>' CssClass="Green" />
-            </div>
-            
-          </ItemTemplate>
-        </asp:FormView>
+            <li>
+                <asp:DropDownList ID="UserDropDownList" runat="server"
+                    SelectMethod="UserMethod_GetData"
+                    DataTextField="Name"
+                    DataValueField="UserID" AutoPostBack="true" />
+            </li>
+        </ItemTemplate>
+    </asp:FormView>
+
 </asp:Content>
+

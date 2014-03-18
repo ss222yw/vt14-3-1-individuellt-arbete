@@ -7,10 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ss222yw_Projekt.Pages.CarAdPages {
+namespace ss222yw_Projekt.Pages.CarBrandPage {
     
     
-    public partial class Create {
+    public partial class Edit {
+        
+        /// <summary>
+        /// HyperLink2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
         
         /// <summary>
         /// MessagePanel control.
@@ -40,6 +49,15 @@ namespace ss222yw_Projekt.Pages.CarAdPages {
         protected global::System.Web.UI.WebControls.ImageButton ImageCloseButton;
         
         /// <summary>
+        /// ValidationSummary1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        
+        /// <summary>
         /// ValidationSummary2 control.
         /// </summary>
         /// <remarks>
@@ -49,12 +67,12 @@ namespace ss222yw_Projekt.Pages.CarAdPages {
         protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary2;
         
         /// <summary>
-        /// CarAdFormView control.
+        /// ListView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView CarAdFormView;
+        protected global::System.Web.UI.WebControls.ListView ListView1;
     }
 }

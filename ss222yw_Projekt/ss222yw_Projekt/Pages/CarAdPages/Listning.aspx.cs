@@ -11,9 +11,16 @@ namespace ss222yw_Projekt.Pages.CarAdPages
 {
     public partial class Listning : System.Web.UI.Page
     {
+        private Service _service;
+
+        private Service Service
+        {
+            get { return _service ?? (_service = new Service()); }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-             // Om det finns något meddelande i extension-metoden så hämtas det
+             // Om det finns något meddelande så hämtas det
             MessageLiteral.Text = Page.GetTempData("Message") as string;
             MessagePanel.Visible = !String.IsNullOrWhiteSpace(MessageLiteral.Text);
         }
@@ -24,16 +31,16 @@ namespace ss222yw_Projekt.Pages.CarAdPages
         //     int startRowIndex
         //     out int totalRowCount
         //     string sortByExpression
-        public IEnumerable<CarAd> CarAdListView_GetData()
+        public List<CarAd> CarAdListView_GetData([RouteData] int id )
         {
             try
             {
                 Service service = new Service();
-                return service.GetCarAds();
+                return service.GetCarAdByUserID(id);
             }
             catch (Exception)
             {
-                ModelState.AddModelError(String.Empty, "Fel inträffade då Bilannonser hämtades.");
+                ModelState.AddModelError(String.Empty, "Du har inga bilannonser!");
                 return null;
             }
         }
@@ -44,18 +51,10 @@ namespace ss222yw_Projekt.Pages.CarAdPages
         //     int startRowIndex
         //     out int totalRowCount
         //     string sortByExpression
-        public IEnumerable<User> UserListView1_GetData()
+
+        public User CarBrandListView_GetData([RouteData] int id)
         {
-            try
-            {
-                Service service = new Service();
-                return service.GetUsers();
-            }
-            catch (Exception)
-            {
-                ModelState.AddModelError(String.Empty, "Fel inträffade då Användaren hämtades.");
-                return null;
-            }
+            return Service.GetUserByID(id);
         }
     }
 }

@@ -128,7 +128,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="Contact.aspx" />
-    <Content Include="Content\Style.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -185,6 +185,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
+    <Content Include="Content\Cars.jpg" />
     <Content Include="Images\Close-Button %281%29.png" />
     <Content Include="Images\close-button.png" />
     <Content Include="Images\close.png" />
@@ -203,13 +204,15 @@
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Pages\CarAdPages\Create.aspx" />
+    <Content Include="Pages\CarAdPages\CreateCarBrand.aspx" />
     <Content Include="Pages\CarAdPages\Delete.aspx" />
-    <Content Include="Pages\CarAdPages\DeleteCarBrand.aspx" />
     <Content Include="Pages\CarAdPages\Details.aspx" />
     <Content Include="Pages\CarAdPages\Edit.aspx" />
     <Content Include="Pages\CarAdPages\Listning.aspx" />
     <Content Include="Pages\CarAdPages\LoggaIn.aspx" />
     <Content Include="Pages\CarAdPages\Users.aspx" />
+    <Content Include="Pages\CarBrandPage\Delete.aspx" />
+    <Content Include="Pages\CarBrandPage\Edit.aspx" />
     <Content Include="Pages\Shared\Error.aspx" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -324,19 +327,19 @@
     <Compile Include="Pages\CarAdPages\Create.aspx.designer.cs">
       <DependentUpon>Create.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CarAdPages\CreateCarBrand.aspx.cs">
+      <DependentUpon>CreateCarBrand.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\CarAdPages\CreateCarBrand.aspx.designer.cs">
+      <DependentUpon>CreateCarBrand.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CarAdPages\Delete.aspx.cs">
       <DependentUpon>Delete.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\CarAdPages\Delete.aspx.designer.cs">
       <DependentUpon>Delete.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\CarAdPages\DeleteCarBrand.aspx.cs">
-      <DependentUpon>DeleteCarBrand.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\CarAdPages\DeleteCarBrand.aspx.designer.cs">
-      <DependentUpon>DeleteCarBrand.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\CarAdPages\Details.aspx.cs">
       <DependentUpon>Details.aspx</DependentUpon>
@@ -372,6 +375,20 @@
     </Compile>
     <Compile Include="Pages\CarAdPages\Users.aspx.designer.cs">
       <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CarBrandPage\Delete.aspx.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\CarBrandPage\Delete.aspx.designer.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CarBrandPage\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\CarBrandPage\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Shared\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>

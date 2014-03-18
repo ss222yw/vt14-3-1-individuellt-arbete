@@ -50,7 +50,7 @@ namespace ss222yw_Projekt.Model.DAL
                     //avallokerar minne som inte används.
                     users.TrimExcess();
 
-                    // Returnerar referensen till List-objektet.
+                    // Returnerar referensen till objektet.
                     return users;
                 }
                 catch
@@ -76,8 +76,7 @@ namespace ss222yw_Projekt.Model.DAL
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     //Lägger till den paramter den lagrade proceduren kräver.
-                    cmd.Parameters.AddWithValue("@UserID", userID);
-                    //cmd.Parameters.Add("@UserID", SqlDbType.Int, 4).Value = userID;
+                    cmd.Parameters.Add("@UserID", SqlDbType.Int, 4).Value = userID;
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();
@@ -104,7 +103,6 @@ namespace ss222yw_Projekt.Model.DAL
 
                 catch
                 {
-                    // Kastar ett eget undantag om ett undantag kastas.
                     throw new ApplicationException("An error occured in the data access layer.");
                 }
             }

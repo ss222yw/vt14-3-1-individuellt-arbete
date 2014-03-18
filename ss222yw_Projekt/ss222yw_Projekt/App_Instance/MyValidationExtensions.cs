@@ -5,13 +5,13 @@ using System.Linq;
 using System.Web;
 
 
-    public static class MyValidationExtensions
+public static class MyValidationExtensions
+{
+    // Validering affärslogiklagret.
+    public static bool Validate<T>(this T instance, out ICollection<ValidationResult> validationResults)
     {
-
-        public static bool Validate<T>(this T instance, out ICollection<ValidationResult> validationResults)
-        {
-            var validationContext = new ValidationContext(instance);
-            validationResults = new List<ValidationResult>();
-            return Validator.TryValidateObject(instance, validationContext, validationResults, true);
-        }
+        var validationContext = new ValidationContext(instance);
+        validationResults = new List<ValidationResult>();
+        return Validator.TryValidateObject(instance, validationContext, validationResults, true);
     }
+}

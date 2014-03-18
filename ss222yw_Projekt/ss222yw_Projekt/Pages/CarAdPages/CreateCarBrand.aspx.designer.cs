@@ -10,7 +10,7 @@
 namespace ss222yw_Projekt.Pages.CarAdPages {
     
     
-    public partial class Create {
+    public partial class CreateCarBrand {
         
         /// <summary>
         /// MessagePanel control.
@@ -49,12 +49,21 @@ namespace ss222yw_Projekt.Pages.CarAdPages {
         protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary2;
         
         /// <summary>
+        /// ValidationSummary1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        
+        /// <summary>
         /// CarAdFormView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView CarAdFormView;
+        protected global::System.Web.UI.WebControls.ListView CarAdFormView;
     }
 }

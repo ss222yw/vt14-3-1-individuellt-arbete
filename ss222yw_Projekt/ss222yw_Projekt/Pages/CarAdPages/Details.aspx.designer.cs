@@ -40,15 +40,6 @@ namespace ss222yw_Projekt.Pages.CarAdPages {
         protected global::System.Web.UI.WebControls.ImageButton ImageCloseButton;
         
         /// <summary>
-        /// ValidationSummary1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
-        
-        /// <summary>
         /// CarAdView control.
         /// </summary>
         /// <remarks>
@@ -56,14 +47,5 @@ namespace ss222yw_Projekt.Pages.CarAdPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FormView CarAdView;
-        
-        /// <summary>
-        /// CarBrandListView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView CarBrandListView;
     }
 }

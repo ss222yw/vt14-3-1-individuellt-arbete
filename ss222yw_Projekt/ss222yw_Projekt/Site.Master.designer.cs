@@ -31,15 +31,6 @@ namespace ss222yw_Projekt {
         protected global::System.Web.UI.WebControls.PlaceHolder HeadContentPlaceHolder;
         
         /// <summary>
-        /// TheForm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm TheForm;
-        
-        /// <summary>
         /// HyperLink2 control.
         /// </summary>
         /// <remarks>
@@ -47,6 +38,15 @@ namespace ss222yw_Projekt {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
+        
+        /// <summary>
+        /// TheForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm TheForm;
         
         /// <summary>
         /// MainContentPlaceHolder control.

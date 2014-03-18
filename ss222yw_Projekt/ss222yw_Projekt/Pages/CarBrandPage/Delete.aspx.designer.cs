@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ss222yw_Projekt.Pages.CarAdPages {
+namespace ss222yw_Projekt.Pages.CarBrandPage {
     
     
-    public partial class Create {
+    public partial class Delete {
         
         /// <summary>
         /// MessagePanel control.
@@ -40,21 +40,48 @@ namespace ss222yw_Projekt.Pages.CarAdPages {
         protected global::System.Web.UI.WebControls.ImageButton ImageCloseButton;
         
         /// <summary>
-        /// ValidationSummary2 control.
+        /// ValidationSummary1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary2;
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
         
         /// <summary>
-        /// CarAdFormView control.
+        /// ConfirmationPlaceHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView CarAdFormView;
+        protected global::System.Web.UI.WebControls.PlaceHolder ConfirmationPlaceHolder;
+        
+        /// <summary>
+        /// CarBrandName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal CarBrandName;
+        
+        /// <summary>
+        /// DeleteLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton DeleteLinkButton;
+        
+        /// <summary>
+        /// CancelHyperLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink CancelHyperLink;
     }
 }
