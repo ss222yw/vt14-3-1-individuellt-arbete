@@ -24,6 +24,8 @@ namespace ss222yw_Projekt.App_Start
 
             routes.MapPageRoute("EditCarBrand", "Bilmärke/redigera", "~/Pages/CarBrandPage/Edit.aspx");
 
+            routes.MapPageRoute("EditCarBrandID", "Bilmärke/{id}/redigera", "~/Pages/CarBrandPage/Edit.aspx");
+
             routes.MapPageRoute("CarAdDelete", "Bilannonser/{id}/tabort/{id1}", "~/Pages/CarAdPages/Delete.aspx");
 
             routes.MapPageRoute("CarAdDetails", "Bilannonser/{id}", "~/Pages/CarAdPages/Details.aspx");

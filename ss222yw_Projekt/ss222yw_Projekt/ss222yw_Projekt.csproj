@@ -183,9 +183,9 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\volvo.jpg" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
-    <Content Include="Content\Cars.jpg" />
     <Content Include="Images\Close-Button %281%29.png" />
     <Content Include="Images\close-button.png" />
     <Content Include="Images\close.png" />

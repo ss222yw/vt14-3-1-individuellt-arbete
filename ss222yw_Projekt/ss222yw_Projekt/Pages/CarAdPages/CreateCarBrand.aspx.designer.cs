@@ -13,6 +13,15 @@ namespace ss222yw_Projekt.Pages.CarAdPages {
     public partial class CreateCarBrand {
         
         /// <summary>
+        /// HyperLink2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
+        
+        /// <summary>
         /// MessagePanel control.
         /// </summary>
         /// <remarks>

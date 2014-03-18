@@ -6,9 +6,7 @@
         <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%$ RouteUrl:routename=Logga %>' Text="Logga ut" CssClass="SitMasterColor" />
 
     </div>
-    <div>
-        <asp:Button ID="Button1" runat="server" Text="Mina sidor" OnClick="Button1_Click" CssClass="Blue" />
-    </div>
+    
 
     <asp:FormView ID="CarAdFormView" runat="server"
         ItemType="ss222yw_Projekt.Model.CarAd"
@@ -21,6 +19,10 @@
                     DataTextField="Name"
                     DataValueField="UserID" AutoPostBack="true" />
             </li>
+
+            <div>
+        <asp:Button ID="Button1" runat="server" Text="Mina sidor" OnClick="Button1_Click" CssClass="Blue" />
+    </div>
         </ItemTemplate>
     </asp:FormView>
 

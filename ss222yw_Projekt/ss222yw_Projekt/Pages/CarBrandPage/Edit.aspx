@@ -26,11 +26,9 @@
         <ItemTemplate>
             <li>
                 <div class="editor-field">
-                    <asp:TextBox ID="BrandName" runat="server" Text='<%# BindItem.BrandName %>' MaxLength="40" Enabled="false" />
-                    <asp:RequiredFieldValidator ID="BrandNameRequiredFieldValidator" runat="server"
-                        ErrorMessage="Bilmärke måste anges." ControlToValidate="BrandName"
-                        Display="None" ValidationGroup="EditValidation">
-                    </asp:RequiredFieldValidator>
+                   
+                    <span><%# Item.BrandName %></span>
+                
                 </div>
 
                 <asp:LinkButton ID="LinkButton1" runat="server" CommandName="Edit" Text="Redigera" CausesValidation="false" />
@@ -40,8 +38,7 @@
 
         <EditItemTemplate>
             <li>
-                <asp:TextBox ID="BrandNameTextBox" runat="server" Text='<%# Bind("BrandName") %>' MaxLength="40" Enabled="true" />
-                <asp:TextBox ID="BrandName" runat="server" Text='<%# BindItem.BrandName %>' MaxLength="40" Enabled="false" />
+                <asp:TextBox ID="BrandName" runat="server" Text='<%# BindItem.BrandName %>' MaxLength="40" Enabled="true" />
                 <asp:RequiredFieldValidator ID="HeaderRequiredFieldValidator" runat="server"
                     ErrorMessage="Bilmärke måste anges." ControlToValidate="BrandName"
                     Display="None" ValidationGroup="EditValidation">

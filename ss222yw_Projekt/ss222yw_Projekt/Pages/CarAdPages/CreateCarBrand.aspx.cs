@@ -37,7 +37,7 @@ namespace ss222yw_Projekt.Pages.CarAdPages
                 {
                     Service.SaveCarBrand(carBrand);
                     Page.SetTempData("Message", "Bilmärken har lades till.");
-                    Response.RedirectToRoute("CareateCarBrand");
+                    Response.RedirectToRoute("EditCarBrand");
                     Context.ApplicationInstance.CompleteRequest();
                 }
                 catch (Exception)

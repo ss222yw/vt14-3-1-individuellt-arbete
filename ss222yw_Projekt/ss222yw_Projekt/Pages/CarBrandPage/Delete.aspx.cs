@@ -17,10 +17,10 @@ namespace ss222yw_Projekt.Pages.CarBrandPage
             get { return _service ?? (_service = new Service()); }
         }
 
-        public int CarBrandID { get; set; }
+    
         protected void Page_Load(object sender, EventArgs e)
         {
-            CancelHyperLink.NavigateUrl = GetRouteUrl("CarAdCreate");
+            CancelHyperLink.NavigateUrl = GetRouteUrl("EditCarBrandID", new { id = Id });
 
             if (!IsPostBack)
             {
@@ -67,7 +67,7 @@ namespace ss222yw_Projekt.Pages.CarBrandPage
             }
             catch (Exception)
             {
-                ModelState.AddModelError(String.Empty, "Fel inträffade då bilmärken skulle tas bort.");
+                ModelState.AddModelError(String.Empty, "Fel! Bilmärket används redan av en annan bilannons.");
             }
         }
     }

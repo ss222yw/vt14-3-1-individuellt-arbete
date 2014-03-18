@@ -20,7 +20,7 @@ namespace ss222yw_Projekt.Pages.CarAdPages
         public IEnumerable<User> UserMethod_GetData()
         {
             Service service = new Service();
-            return service.GetUsers();
+            return service.GetUser();
 
         }
 

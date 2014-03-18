@@ -78,25 +78,25 @@ namespace ss222yw_Projekt.Model
         }
 
 
-        /// Hämtar alla CarBrands.
-        public IEnumerable<CarBrand> GetCarBrand(bool refresh = false)
+        /// Hämtar alla Users och catchar dom för 10 min så det sparas i asp och inte behöva anropa connectiong för database.
+        public IEnumerable<User> GetUser(bool refresh = false)
         {
             // Försöker hämta lista med CarBrands från cachen.
-            var carBrands = HttpContext.Current.Cache["CarBrand"] as IEnumerable<CarBrand>;
+            var users = HttpContext.Current.Cache["User"] as IEnumerable<User>;
 
             // Om det inte finns det en lista med CarBrands...
-            if (carBrands == null || refresh)
+            if (users == null || refresh)
             {
                 // ...hämtar då lista med CarBrands...
-                carBrands = CarBrandDAL.GetCarBrand();
+                users = UserDAL.GetUser();
 
                 // ...och cachar dessa. List-objektet, inklusive alla User-objekt, kommer att cachas 
                 // under 10 minuter, varefter de automatiskt avallokeras från webbserverns primärminne.
-                HttpContext.Current.Cache.Insert("CarBrand", carBrands, null, DateTime.Now.AddMinutes(10), TimeSpan.Zero);
+                HttpContext.Current.Cache.Insert("User", users, null, DateTime.Now.AddMinutes(10), TimeSpan.Zero);
             }
 
             // Returnerar listan med CarBrands.
-            return carBrands;
+            return users;
         }
 
 
@@ -113,10 +113,10 @@ namespace ss222yw_Projekt.Model
             return UserDAL.GetUserByID(userID);
         }
 
-        // Hämtar alla User som finns lagrade i databasen.
-        public IEnumerable<User> GetUsers()
+        // Hämtar alla CarBrand som finns lagrade i databasen.
+        public IEnumerable<CarBrand> GetCarBrand()
         {
-            return UserDAL.GetUser();
+            return CarBrandDAL.GetCarBrand();
         }
 
 

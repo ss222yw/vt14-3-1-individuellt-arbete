@@ -15,7 +15,7 @@ namespace ss222yw_Projekt.Model
 
 
 
-        [Required(ErrorMessage = "Beskriv din annosn!")]
+        [Required(ErrorMessage = "Beskriv din annons!")]
         [StringLength(500, ErrorMessage = "Beskrivning kan bestå av som mest 500 tecken.")]
         public string Description { get; set; }
 
@@ -36,7 +36,6 @@ namespace ss222yw_Projekt.Model
        
         [Required(ErrorMessage = "Årsmådellen måste anges.")]
         [StringLength(4, ErrorMessage = "Årsmodellen kan bestå av som mest 4 tecken.")]
-        [RegularExpression(@"^(19|20)\d{2}$", ErrorMessage = "Årsmodellen verkar inte vara korrekt.")]
         public string ModelYear { get; set; }
 
         
@@ -44,7 +43,7 @@ namespace ss222yw_Projekt.Model
         
 
        
-
+       
 
         
     }

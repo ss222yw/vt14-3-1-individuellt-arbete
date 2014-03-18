@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CreateCarBrand.aspx.cs" Inherits="ss222yw_Projekt.Pages.CarAdPages.CreateCarBrand" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
-
+     <div>
+        <asp:HyperLink ID="HyperLink2" runat="server" Text="Tillbaka" NavigateUrl='<%$ RouteUrl:routename=CarAdCreate %>'  CssClass="Green"/>
+    </div>
     <asp:Panel runat="server" ID="MessagePanel" Visible="false" CssClass="success">
         <asp:Literal runat="server" ID="MessageLiteral" />
         <asp:ImageButton ID="ImageCloseButton" runat="server" ImageUrl="~/Images/Close.png" CausesValidation="False" CssClass="closebutton" />

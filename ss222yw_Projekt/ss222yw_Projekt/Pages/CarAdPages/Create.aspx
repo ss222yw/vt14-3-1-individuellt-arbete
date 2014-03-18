@@ -32,21 +32,33 @@
                 <label for="ModelYear">Årsmodell</label>
             </div>
             <div class="editor-field">
-                <asp:TextBox ID="ModelYear" runat="server" Text='<%# BindItem.ModelYear %>' MaxLength="4" />
+                <asp:TextBox ID="ModelYear" runat="server" Text='<%# BindItem.ModelYear %>' MaxLength="4"  />
                 <asp:RequiredFieldValidator ID="ModelYearRequiredFieldValidator" runat="server"
                     ErrorMessage="Årsmodell måste anges." ControlToValidate="ModelYear"
                     Display="None" ValidationGroup="CreateValidation">
                 </asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3"
+                     runat="server" ErrorMessage="Årsmodellen verkar inte vara rätt" 
+                                   ValidationExpression="\d+" 
+                                   ControlToValidate="ModelYear" 
+                           CssClass="validation-summary-errors">
+                </asp:RegularExpressionValidator>
             </div>
             <div class="editor-label">
                 <label for="CarColor">Färg</label>
             </div>
             <div class="editor-field">
-                <asp:TextBox ID="CarColor" runat="server" Text='<%# BindItem.CarColor %>' MaxLength="25" />
+                <asp:TextBox ID="CarColor" runat="server" Text='<%# BindItem.CarColor %>' MaxLength="25"  />
                 <asp:RequiredFieldValidator ID="CarColorRequiredFieldValidator1" runat="server"
                     ErrorMessage="Färgen måste anges." ControlToValidate="CarColor"
                     Display="None" ValidationGroup="CreateValidation">
                 </asp:RequiredFieldValidator>
+                               <asp:RegularExpressionValidator ID="RegularExpressionValidator1"
+                     runat="server" ErrorMessage="Färgen verkar inte vara rätt" 
+                                   ValidationExpression="^\D*" 
+                                   ControlToValidate="CarColor"
+                                   CssClass="validation-summary-errors">
+                </asp:RegularExpressionValidator>
             </div>
             <div class="editor-label">
                 <label for="Price">Pris</label>
@@ -55,8 +67,15 @@
                 <asp:TextBox ID="Price" runat="server" Text='<%# BindItem.Price %>' />
                 <asp:RequiredFieldValidator ID="PriceRequiredFieldValidator1" runat="server"
                     ErrorMessage="Priset måste anges." ControlToValidate="Price"
-                    Display="None" ValidationGroup="CreateValidation">
+                    Display="None" ValidationGroup="CreateValidation" 
+                    CssClass="validation-summary-errors">
                 </asp:RequiredFieldValidator>
+                       <asp:RegularExpressionValidator ID="RegularExpressionValidator2"
+                     runat="server" ErrorMessage="Priset verkar inte vara rätt" 
+                                   ValidationExpression="\d+" 
+                                   ControlToValidate="Price" 
+                           CssClass="validation-summary-errors">
+                </asp:RegularExpressionValidator>
             </div>
             <div class="editor-label">
                 <label for="Description">Beskrivning</label>
@@ -80,12 +99,12 @@
             </div>
             <div>
                 <h3>Bilmärket finns inte ?
-                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%$ RouteUrl:routename=CareateCarBrand %>' Text="Lägg till ny bimärken" CssClass="SitMasterColor" /></h3>
+                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%$ RouteUrl:routename=CareateCarBrand %>' Text="Lägg till ny bilmärken" CssClass="SitMasterColor" /></h3>
 
             </div>
             <div>
                 <h3>Eller 
-                    <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl='<%$ RouteUrl:routename=EditCarBrand %>' Text="Redigera bimärken" CssClass="SitMasterColor" />
+                    <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl='<%$ RouteUrl:routename=EditCarBrand %>' Text="Redigera bilmärken" CssClass="SitMasterColor" />
                     om ni önskar så!</h3>
 
             </div>
